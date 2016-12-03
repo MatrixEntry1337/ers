@@ -31,6 +31,7 @@ public class Authenticate {
 
 		if(username.length() > 0 && password.length() > 0){
 			Connection conn = getConnection();
+			ReimDAO dao = Factory.newReimDAO(conn);
 			String hashedPassword = new UserDAOImpl(conn).getCreds(username);
 			conn.close();
 			return validatePassword(password, hashedPassword);
@@ -45,5 +46,11 @@ public class Authenticate {
 		if(testAuth.authenticate(username, password))
 			System.out.println("User entered the correct credentials");
 		else System.out.println("User entered the wrong credentials");
+	}
+	
+	static class Factory{
+		public static ReimDAO newReimDAO(Connection conn){
+			return new ReimDAOImpl(conn);
+		}
 	}
 }
