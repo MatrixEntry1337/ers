@@ -12,6 +12,7 @@ public class Authenticate {
 	}
 
 	private boolean validatePassword(String password, String hashedPassword){
+		if(hashedPassword == null) return false;
 		return BCrypt.checkpw(password, hashedPassword);
 	}
 
@@ -30,7 +31,7 @@ public class Authenticate {
 
 		if(username.length() > 0 && password.length() > 0){
 			Connection conn = getConnection();
-			String hashedPassword = new UserDAO(conn).getCreds(username);
+			String hashedPassword = new UserDAOImpl(conn).getCreds(username);
 			conn.close();
 			return validatePassword(password, hashedPassword);
 		}
@@ -39,7 +40,7 @@ public class Authenticate {
 
 	public static void main(String[] args) throws SQLException {
 		Authenticate testAuth = new Authenticate();
-		String username = "thanks";
+		String username = "kchangfatt";
 		String password = "password1";
 		if(testAuth.authenticate(username, password))
 			System.out.println("User entered the correct credentials");
