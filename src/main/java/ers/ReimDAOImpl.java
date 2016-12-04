@@ -28,7 +28,7 @@ public class ReimDAOImpl implements ReimDAO {
 			System.out.println("SQLException at getAllReims");
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 	
 	private void mapRows(ResultSet rs, List<Reim> list) throws SQLException{
@@ -40,6 +40,9 @@ public class ReimDAOImpl implements ReimDAO {
 			amount = rs.getInt("REIMB_AMOUNT");
 			author = rs.getInt("REIMB_AUTHOR");
 			resolver = rs.getInt("REIMB_RESOLVER");
+			statusId = rs.getInt("REIMB_STATUS_ID");
+			typeId = rs.getInt("REIMB_TYPE_ID");
+			description = rs.getString("REIMB_DESCRIPTION");
 		} 
 	}
 	
@@ -54,5 +57,6 @@ public class ReimDAOImpl implements ReimDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
+
+

@@ -24,15 +24,14 @@ public class Authenticate {
 	}
 
 	public boolean authenticate(String username, String password) throws SQLException{
-
 		// validate login
 		username = username.trim();
 		password = password.trim();
 
 		if(username.length() > 0 && password.length() > 0){
 			Connection conn = getConnection();
-			ReimDAO dao = Factory.newReimDAO(conn);
-			String hashedPassword = new UserDAOImpl(conn).getCreds(username);
+			UserDAO dao = UserFactory.newUserDAO(conn);
+			String hashedPassword = dao.getCreds(username);
 			conn.close();
 			return validatePassword(password, hashedPassword);
 		}
@@ -41,16 +40,17 @@ public class Authenticate {
 
 	public static void main(String[] args) throws SQLException {
 		Authenticate testAuth = new Authenticate();
-		String username = "kchangfatt";
+		String username = "thanks";
 		String password = "password1";
 		if(testAuth.authenticate(username, password))
 			System.out.println("User entered the correct credentials");
 		else System.out.println("User entered the wrong credentials");
 	}
 	
-	static class Factory{
-		public static ReimDAO newReimDAO(Connection conn){
-			return new ReimDAOImpl(conn);
-		}
+}
+
+class UserFactory{
+	public static UserDAO newUserDAO(Connection conn){
+		return new UserDAOImpl(conn);
 	}
 }
