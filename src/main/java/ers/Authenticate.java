@@ -19,7 +19,7 @@ public class Authenticate {
 	private Connection getConnection() throws SQLException{
 		Connection conn = null;
 		conn = ServiceLocator.getERSDatabase().getConnection();
-		conn.setAutoCommit(true);
+		conn.setAutoCommit(false);
 		return conn;
 	}
 

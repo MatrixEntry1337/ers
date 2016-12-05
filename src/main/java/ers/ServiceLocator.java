@@ -34,7 +34,7 @@ public class ServiceLocator {
 		}
 	}
 	
-	// checks to see if ers is nill
+	// checks to see if ers is null
 	public synchronized static DataSource getERSDatabase(){
 		if(ers == null)
 			ers = lookUpERS();
@@ -47,6 +47,7 @@ public class ServiceLocator {
 			DataSource ds = (DataSource) ctxt.lookup(env.getProperty("ersdb"));
 			return ds;
 		}catch(NamingException e){
+			System.out.println("Could not connect to the datasource.");
 			e.printStackTrace();
 			return null;
 		}
