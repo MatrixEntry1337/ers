@@ -1,10 +1,10 @@
 package ers;
 
-public class ReimType {
+public class Type {
 	private int id;
 	private String type;
 	
-	public ReimType(){
+	public Type(){
 		super();
 	}
 
@@ -23,4 +23,10 @@ public class ReimType {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Type [id=" + id + ", type=" + type + "]";
+	}
+	
 }

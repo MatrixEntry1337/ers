@@ -18,11 +18,18 @@ public class ReimDAOImpl implements ReimDAO {
 	}
 
 	@Override
-	public List<Reim> getReims() {
+	public List<Reim> getAllReims() {
 
 		List<Reim> list = new ArrayList<Reim>();
 		try{
-			String sql = "SELECT * FROM ERS_REIMBURSEMENT";
+			String sql = "SELECT *"
+						 + " FROM ERS_REIMBURSEMENT"
+						 + " JOIN ERS_REIMBURSEMENT_TYPE"
+						 + " ON ERS_REIMBURSEMENT.REIMB_TYPE_ID = ERS_REIMBURSEMENT_TYPE.REIMB_TYPE_ID"
+						 + " JOIN ERS_REIMBURSEMENT_STATUS"
+						 + " ON ERS_REIMBURSEMENT.REIMB_STATUS_ID = ERS_REIMBURSEMENT_STATUS.REIMB_STATUS_ID"
+						 + " INNER JOIN ERS_USERS"
+						 + " ON ERS_REIMBURSEMENT.REIMB_AUTHOR = ERS_USERS.ERS_USERS_ID";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			mapRows(rs, list);
@@ -49,9 +56,9 @@ public class ReimDAOImpl implements ReimDAO {
 			resolver = rs.getInt("REIMB_RESOLVER");
 			reim.setResolver(resolver);
 			statusId = rs.getInt("REIMB_STATUS_ID");
-			reim.setStatusId(statusId);
+			reim.setStatus(statusId, rs.getString("REIMB_STATUS"));
 			typeId = rs.getInt("REIMB_TYPE_ID");
-			reim.setTypeId(typeId);
+			reim.setType(typeId, rs.getString("REIMB_TYPE"));
 			description = rs.getString("REIMB_DESCRIPTION");
 			reim.setDescription(description);
 			submitted = rs.getTimestamp("REIMB_SUBMITTED");
@@ -62,21 +69,27 @@ public class ReimDAOImpl implements ReimDAO {
 		} 
 	}
 
-	public Reim createReim(int id, int amount, int author, int typeId, String description){
-		Reim reim = reimCreator(id, amount, author, typeId, description);
-		String sql = "INSERT INTO "
-				+"ERS_REIMBURSEMENT(REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) "
-				+"VALUES(?, ?, ?, ?, ?, ?, ?)";
+	public Reim createReim(int amount, int author, int typeId, String description){
+		Reim reim = null; 
+		String sql = "INSERT INTO"
+				+ " ERS_REIMBURSEMENT"
+				+ " (REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION,"
+				+ " REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) "
+				+ " VALUES(?, ?, ?, ?, ?, ?)";
 		try{
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, id);
-			stmt.setInt(2, amount);
-			stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			stmt.setString(4, description);
-			stmt.setInt(5, author);
-			stmt.setInt(6, 1);
-			stmt.setInt(7, 1);
+			PreparedStatement stmt = conn.prepareStatement(sql, new String[]{"REIMB_ID"});
+			Timestamp ts = new Timestamp(System.currentTimeMillis());
+			stmt.setInt(1, amount);
+			stmt.setTimestamp(2, ts);
+			stmt.setString(3, description);
+			stmt.setInt(4, author);
+			stmt.setInt(5, 1);
+			stmt.setInt(6, typeId);
 			stmt.executeQuery();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			int generatedPK = rs.getInt(1);
+			reim = reimCreator(generatedPK, amount, author, typeId, description, ts);
 		}catch(SQLException e){
 			System.out.println("SQL Exception at create a Reimburement");
 			e.printStackTrace();
@@ -84,14 +97,14 @@ public class ReimDAOImpl implements ReimDAO {
 		return reim;
 	}
 
-	private Reim reimCreator(int id, int amount, int author, int typeId, String description){
+	private Reim reimCreator(int id, int amount, int author, int typeId, String description, Timestamp submitted){
 		Reim reim = new Reim();
 		reim.setId(id);
 		reim.setAmount(amount);
 		reim.setAuthor(author);
-		reim.setTypeId(typeId);
+		reim.setType(typeId, null);
 		reim.setDescription(description);
-		reim.setSubmitted(new Timestamp(System.currentTimeMillis()));
+		reim.setSubmitted(submitted); 
 		return reim;
 	}
 

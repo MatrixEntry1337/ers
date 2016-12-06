@@ -9,9 +9,9 @@ public class Reim {
 	private Timestamp resolved;
 	private String description;
 	private User author;
-	private int resolver;
-	private int statusId;
-	private int typeId;
+	private User resolver;
+	private Status status;
+	private Type type;
 	
 	public Reim(){
 		super();
@@ -61,40 +61,45 @@ public class Reim {
 		return author;
 	}
 	
-	public void setAuthor(int author) {
+	public void setAuthor(int id) {
 		this.author = new User();
-		this.author.setId(author);
+		this.author.setId(id);
 	}
 	
-	public int getResolver() {
+	public User getResolver() {
 		return resolver;
 	}
 	
-	public void setResolver(int resolver) {
-		this.resolver = resolver;
+	public void setResolver(int id) {
+		this.resolver = new User();
+		this.resolver.setId(id);
 	}
 	
-	public int getStatusId() {
-		return statusId;
+	public Status getStatus() {
+		return status;
 	}
 	
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setStatus(int id, String status) {
+		this.status = new Status();
+		this.status.setId(id);
+		this.status.setStatus(status);
 	}
 	
 
-	public int getTypeId() {
-		return typeId;
+	public Type getType() {
+		return type;
 	}
 	
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+	public void setType(int id, String type) {
+		this.type = new Type();
+		this.type.setId(id);
+		this.type.setType(type);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Reim [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + ", author=" + author + ", resolver=" + resolver + ", statusId="
-				+ statusId + ", typeId=" + typeId + "]\n";
+				+ ", description=" + description + ", author=" + author + ", resolver=" + resolver + ", status="
+				+ status + ", type=" + type + "]\n";
 	}
 }
