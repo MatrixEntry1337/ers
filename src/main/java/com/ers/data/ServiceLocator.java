@@ -9,7 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class ServiceLocator {
+class ServiceLocator {
 	
 	private static DataSource ers;
 	private static Properties env;
@@ -35,7 +35,7 @@ public class ServiceLocator {
 	}
 	
 	// checks to see if ers is null
-	public synchronized static DataSource getERSDatabase(){
+	synchronized static DataSource getERSDatabase(){
 		if(ers == null)
 			ers = lookUpERS();
 		return ers;
