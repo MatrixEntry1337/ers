@@ -13,11 +13,11 @@ import com.ers.beans.User;
 public class Test {
 	
 	public static void main(String[] args) throws SQLException, AuthenticationException, ServiceUnavailableException {
-		User user = new Authenticate().authenticate("thanks", "password1");
+		User user = BusinessFactory.getDelegate().authenticateUser("thanks", "password1");
 		System.out.println(user);
-		List<Reim> list = new Reimbursement().all();
+		List<Reim> list = BusinessFactory.getDelegate().all();
 		System.out.println(list);
-		List<Reim> list2 = new Reimbursement().myReims(user);
+		List<Reim> list2 = BusinessFactory.getDelegate().getUserReims(user);
 		System.out.println(list2);
 //		System.out.println(facade.createReim(user, 40, 2, "Food"));
 		System.out.println("Complete!");

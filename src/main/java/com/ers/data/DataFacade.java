@@ -4,24 +4,36 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.AuthenticationException;
 import javax.naming.ServiceUnavailableException;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import com.ers.beans.Reim;
+import com.ers.beans.Status;
+import com.ers.beans.Type;
 import com.ers.beans.User;
 
 
-public class DataFacade {
+public class DataFacade implements DataFacadeInterface{
 
-	private Connection getConnection() throws SQLException{
+	private static DataFacade INSTANCE = null;
+	
+	private DataFacade(){}
+	
+	synchronized public static DataFacade getInstance(){
+		if (INSTANCE == null)
+			INSTANCE = new DataFacade();
+		return INSTANCE;
+	}
+	
+	private Connection getConnection() 
+			throws SQLException{
 		Connection conn = ServiceLocator.getERSDatabase().getConnection();
 		conn.setAutoCommit(false);
 		return conn;
 	}
-
-	public List<Reim> getAllReims(){
+	
+	@Override
+	public List<Reim> getAllReims() 
+			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
@@ -31,6 +43,7 @@ public class DataFacade {
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
+			throw new ServiceUnavailableException();
 		}finally{
 			try {
 				conn.close();
@@ -39,10 +52,11 @@ public class DataFacade {
 				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 	
-	public List<Reim> getReims(String username) throws ServiceUnavailableException{
+	@Override
+	public List<Reim> getUserReims(String username) 
+			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
@@ -63,12 +77,14 @@ public class DataFacade {
 		}
 	}
 
-	public Reim createReim(User author, int amount, int type, String description) throws ServiceUnavailableException{
+	@Override
+	public Reim createReim(User author, int amount, Type type, Status status, String description) 
+			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			Reim reim = dao.insertReim(author, amount, type, description);
+			Reim reim = dao.insertReim(author, amount, type, status, description);
 			conn.commit();
 			conn.close();
 			return reim;
@@ -86,7 +102,9 @@ public class DataFacade {
 		}
 	}
 
-	public String getHash(String username) throws ServiceUnavailableException{
+	@Override
+	public String getHash(String username) 
+			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
@@ -107,7 +125,9 @@ public class DataFacade {
 		}
 	}
 
-	public User getUser(String username){
+	@Override
+	public User getUser(String username) 
+			throws ServiceUnavailableException{
 		User user = null;
 		Connection conn = null;
 		try{
@@ -118,6 +138,7 @@ public class DataFacade {
 			return user;
 		}catch(SQLException e){
 			e.printStackTrace();
+			throw new ServiceUnavailableException();
 		}finally{
 			try {
 				conn.close();
@@ -126,10 +147,11 @@ public class DataFacade {
 				e.printStackTrace();
 			}
 		}
-		return user;
 	}
 
-	public boolean updateReimStatus(int reim, int resolver, int status) throws ServiceUnavailableException{
+	@Override
+	public void updateReimStatus(int reim, int resolver, int status) 
+			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
@@ -137,7 +159,6 @@ public class DataFacade {
 			dao.setReimStatus(reim, resolver, status);
 			conn.commit();
 			conn.close();
-			return true;
 		}catch(SQLException e){
 			e.printStackTrace();
 			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
