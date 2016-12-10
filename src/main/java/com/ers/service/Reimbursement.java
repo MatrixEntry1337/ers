@@ -23,13 +23,13 @@ class Reimbursement {
 	}
 	
 	
-	List<Reim> all() 
+	private List<Reim> getAllReims() 
 			throws ServiceUnavailableException{
 		List<Reim> list = DataFactory.getFacade().getAllReims();
 		return list;
 	}
 
-	List<Reim> getUserReims(User user) 
+	private List<Reim> getUserReims(User user) 
 			throws ServiceUnavailableException{
 		List<Reim> list = DataFactory.getFacade().getUserReims(user.getUsername());
 		return list;
@@ -50,5 +50,11 @@ class Reimbursement {
 	Reim createReim(User user, int amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException{
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
+	}
+
+	public List<Reim> getReims(User user) throws ServiceUnavailableException {
+		if(user.getRole().getRole().equals("Manager"))
+			return getAllReims();
+		return getUserReims(user);
 	}	
 }

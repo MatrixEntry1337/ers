@@ -29,13 +29,8 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 
 	@Override
-	public List<Reim> all() throws ServiceUnavailableException {
-		return Reimbursement.getInstance().all();
-	}
-
-	@Override
-	public List<Reim> getUserReims(User user) throws ServiceUnavailableException {
-		return Reimbursement.getInstance().getUserReims(user);
+	public List<Reim> getReims(User user) throws ServiceUnavailableException{
+		return Reimbursement.getInstance().getReims(user);
 	}
 	
 	@Override

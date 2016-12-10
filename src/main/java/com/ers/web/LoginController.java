@@ -49,24 +49,28 @@ public class LoginController {
 		if(username != null && password != null){
 			username = username.trim();
 			password = password.trim();
+			System.out.println("Username after trim: " + username);
+			System.out.println("Password after trim: " + password);
 			if(username.length() == 0 && password.length() == 0){
-				req.setAttribute("loginMessage", "Please valid credentials");
+				String loginMessage = "Please enter valid credentials";
+				req.setAttribute("loginMessage", loginMessage);
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 			}
 			else{
 				// create session
 				try{
 					User user = BusinessFactory.getDelegate()
-							.authenticateUser(req.getParameter("username"), req.getParameter("password"));
-					logUserData(req, user);
-					// goto next page
-					resp.sendRedirect("processLogin.do");
-
+							.authenticateUser(username, password);
+					System.out.println("User: " + user);
+					if(user != null){
+						logUserData(req, user);
+						// goto next page
+						resp.sendRedirect("processLogin.do");
+					}
 				}catch(AuthenticationException e){
 					e.printStackTrace();
-					//			resp.sendRedirect("login.jsp");
-					req.setAttribute("loginMessage", 
-							"There was an error with your Username/Password combination. Please try again.");
+					String loginMessage = "There was an error with your Username/Password combination. Please try again";
+					req.setAttribute("loginMessage", loginMessage); 
 					req.getRequestDispatcher("login.jsp").forward(req, resp);
 
 				}catch(ServiceUnavailableException e){

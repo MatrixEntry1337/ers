@@ -89,11 +89,17 @@ public class DataFacade implements DataFacadeInterface{
 			conn.close();
 			return reim;
 		}catch(SQLException e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
+			}
 			e.printStackTrace();
 			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
 		}finally{
 			try {
-				conn.rollback();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -15,11 +15,7 @@ public interface BusinessDelegateInterface {
 	public User authenticateUser(String username, String password)
 			throws AuthenticationException, ServiceUnavailableException;
 	
-	public List<Reim> all() 
-			throws ServiceUnavailableException;
-	
-	public List<Reim> getUserReims(User user) 
-			throws ServiceUnavailableException;
+	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
 	public Reim changeStatus(Reim reim, User user, Status status)
 			throws ServiceUnavailableException, UnauthorizedException;

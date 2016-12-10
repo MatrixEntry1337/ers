@@ -1,7 +1,6 @@
 package com.ers.web;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +15,13 @@ public class Dispatcher extends HttpServlet{
 
 		String requestURI = req.getRequestURI();
 		switch(requestURI){
-			case"/ers/":{
-				resp.sendRedirect("login.jsp");
-			}
 			case "/ers/login.do":{
 				LoginController.getInstance().login(req, resp);
+				break;
 			}
 			case"/ers/processLogin.do":{
-				System.out.println("Works!!");
+				MainController.getInstance().getUserData(req, resp);
+				break;
 			}
 			default:{
 				resp.setStatus(404);
