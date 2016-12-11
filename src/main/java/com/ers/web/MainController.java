@@ -25,17 +25,28 @@ public class MainController{
 		return INSTANCE;
 	}
 
+//	private User getSessionUser(HttpServletRequest req, HttpServletResponse resp){
+//		HttpSession session = req.getSession(true);
+//		User user = (User)session.getAttribute("user");
+//		if(user == null)
+//			resp.setStatus(401);
+//		return user;
+//	}
+	
 	public void getUserData(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
-		HttpSession session = req.getSession(true);
-		System.out.println(session.getAttribute("user"));
+		HttpSession session = req.getSession();
+		if(session.getAttribute("user") == null){
+			System.out.println("It works");
+			resp.sendError(401);
+		}
 		User user = (User)session.getAttribute("user");
 		try{
 			List<Reim> list = BusinessDelegate.getInstance().getReims(user);
 			session.setAttribute("reims", list);
 			req.setAttribute("Reims", list);
 			System.out.println(list);
-			req.getRequestDispatcher("main.jsp")
+			req.getRequestDispatcher("WEB-INF/pages/main.jsp")
 			.forward(req, resp);
 		}catch(ServiceUnavailableException e){
 			e.printStackTrace();

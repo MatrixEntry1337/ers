@@ -119,7 +119,7 @@ class ReimDAO{
 		return new User(id, username, firstName, lastName, email, null);
 	}
 
-	Reim insertReim(User author, int amount, Type type, Status status, String description)
+	Reim insertReim(User author, double amount, Type type, Status status, String description)
 			throws SQLException{
 		Reim reim = null; 
 		String sql = "INSERT INTO"
@@ -129,7 +129,7 @@ class ReimDAO{
 				+ " VALUES(?, ?, ?, ?, ?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql, new String[]{"REIMB_ID"});
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		stmt.setInt(1, amount);
+		stmt.setDouble(1, amount);
 		stmt.setTimestamp(2, ts);
 		stmt.setString(3, description);
 		stmt.setInt(4, author.getId());
@@ -143,7 +143,7 @@ class ReimDAO{
 		return reim;
 	}
 
-	private Reim constructReim(int id, User author, int amount, Type type, Status status, String description, Timestamp submitted){
+	private Reim constructReim(int id, User author, double amount, Type type, Status status, String description, Timestamp submitted){
 		Reim reim = new Reim(id, amount, submitted, null, description, author, null, status, type);
 		return reim;
 	}

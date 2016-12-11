@@ -19,7 +19,7 @@ public class Dispatcher extends HttpServlet{
 				LoginController.getInstance().login(req, resp);
 				break;
 			}
-			case"/ers/processLogin.do":{
+			case "/ers/main.do":{
 				MainController.getInstance().getUserData(req, resp);
 				break;
 			}

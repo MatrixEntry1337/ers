@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Reim {
 	private int id;
-	private int amount;
+	private double amount;
 	private Timestamp submitted;
 	private Timestamp resolved;
 	private String description;
@@ -17,7 +17,7 @@ public class Reim {
 		super();
 	}
 	
-	public Reim(int id, int amount, Timestamp submitted, Timestamp resolved, String description, User author,
+	public Reim(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author,
 			User resolver, Status status, Type type) {
 		super();
 		this.id = id;
@@ -39,7 +39,7 @@ public class Reim {
 		this.id = id;
 	}
 	
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	
@@ -59,7 +59,7 @@ public class Reim {
 		this.resolved = resolved;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	

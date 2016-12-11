@@ -15,7 +15,7 @@ public interface DataFacadeInterface {
 	
 	public List<Reim> getUserReims(String username) throws ServiceUnavailableException;
 	
-	public Reim createReim(User author, int amount, Type type, Status status, String description) throws ServiceUnavailableException;
+	public Reim createReim(User author, double amount, Type type, Status status, String description) throws ServiceUnavailableException;
 	
 	public String getHash(String username) throws ServiceUnavailableException;
 	

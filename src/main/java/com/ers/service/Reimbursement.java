@@ -21,19 +21,6 @@ class Reimbursement {
 			INSTANCE = new Reimbursement();
 		return INSTANCE;
 	}
-	
-	
-	private List<Reim> getAllReims() 
-			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getAllReims();
-		return list;
-	}
-
-	private List<Reim> getUserReims(User user) 
-			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getUsername());
-		return list;
-	}
 
 	Reim changeStatus(Reim reim, User user, Status status) 
 			throws ServiceUnavailableException, UnauthorizedException{
@@ -47,14 +34,50 @@ class Reimbursement {
 		return reim;
 	}
 
-	Reim createReim(User user, int amount, Type type, Status status, String description) 
+	//TODO: validate, create then pass Reim then pass it
+	Reim createReim(User user, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException{
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
+		
+		
 	}
 
 	public List<Reim> getReims(User user) throws ServiceUnavailableException {
 		if(user.getRole().getRole().equals("Manager"))
 			return getAllReims();
 		return getUserReims(user);
-	}	
+	}
+	
+	/* Helper Functions */
+	
+	private List<Reim> getAllReims() 
+			throws ServiceUnavailableException{
+		List<Reim> list = DataFactory.getFacade().getAllReims();
+		return list;
+	}
+
+	private List<Reim> getUserReims(User user) 
+			throws ServiceUnavailableException{
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getUsername());
+		return list;
+	}
+	
+	public boolean validateAmount(String amt){
+		double amount = Double.valueOf(amt); 
+		
+		if(amount > 0){
+			String amountString = Double.toString(amount);
+			int decimalPoint = amountString.indexOf('.');
+			int numDecimals = amountString.length() - decimalPoint -1;
+			if(numDecimals <= 2){
+				return true;
+			}
+				
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Reimbursement.getInstance().validateAmount("0.234"));
+	}
 }

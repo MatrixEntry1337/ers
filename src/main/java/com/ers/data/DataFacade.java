@@ -78,7 +78,7 @@ public class DataFacade implements DataFacadeInterface{
 	}
 
 	@Override
-	public Reim createReim(User author, int amount, Type type, Status status, String description) 
+	public Reim createReim(User author, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{

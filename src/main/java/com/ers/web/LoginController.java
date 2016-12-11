@@ -24,7 +24,7 @@ public class LoginController {
 		return INSTANCE;
 	}
 
-	private void logUserData(HttpServletRequest req, User user){
+	private void logSessionData(HttpServletRequest req, User user){
 		// creates session if not already created
 		HttpSession session = req.getSession(true);
 
@@ -42,42 +42,51 @@ public class LoginController {
 
 	}
 
+	private boolean validateLoginData(String username, String password){
+		if(username != null && password != null){
+			username = username.trim();
+			password = password.trim();
+			if(username.length() > 4 && password.length() > 4){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void login(HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException{
 		String username = req.getParameter("username"); 
 		String password = req.getParameter("password");
 
-		if(username != null && password != null){
-			username = username.trim();
-			password = password.trim();
-			System.out.println("Username after trim: " + username);
-			System.out.println("Password after trim: " + password);
-			if(username.length() == 0 && password.length() == 0){
-				String loginMessage = "Please enter valid credentials";
-				req.setAttribute("loginMessage", loginMessage);
+
+		if(validateLoginData(username, password)){
+			// create session
+			try{
+				User user = BusinessFactory.getDelegate()
+						.authenticateUser(username, password);
+				System.out.println("User: " + user);
+				if(user != null){
+					logSessionData(req, user);
+					// goto next page
+					resp.sendRedirect("main.do");
+				}
+			}catch(AuthenticationException e){
+				e.printStackTrace();
+				String loginMessage = "There was an error with your Username/Password combination. Please try again";
+				req.setAttribute("loginMessage", loginMessage); 
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+			}catch(ServiceUnavailableException e){
+				e.printStackTrace();
+				String loginMessage = "We were unable to connect you to your account."
+						+ " Please try again later while we try to resolve this issue.";
+				req.setAttribute("loginMessage", loginMessage); 
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 			}
-			else{
-				// create session
-				try{
-					User user = BusinessFactory.getDelegate()
-							.authenticateUser(username, password);
-					System.out.println("User: " + user);
-					if(user != null){
-						logUserData(req, user);
-						// goto next page
-						resp.sendRedirect("processLogin.do");
-					}
-				}catch(AuthenticationException e){
-					e.printStackTrace();
-					String loginMessage = "There was an error with your Username/Password combination. Please try again";
-					req.setAttribute("loginMessage", loginMessage); 
-					req.getRequestDispatcher("login.jsp").forward(req, resp);
-
-				}catch(ServiceUnavailableException e){
-					e.printStackTrace();
-				}
-			}
-		
+		}
+		else{
+			String loginMessage = "Please enter valid credentials";
+			req.setAttribute("loginMessage", loginMessage);
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 	}
 }
