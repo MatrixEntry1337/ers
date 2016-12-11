@@ -1,64 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>ERS App</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="ers.css">
-</head>
-<body>
-	<div class="wrapper">
-		<div class="container content">
-			<div class="row">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Amount</th>
-							<th>Type</th>
-							<th>Description</th>
-							<th>Status</th>
-							<th>Submitted</th>
-							<th>Resolved</th>
-							<th>Author</th>
-							<th>Resolver</th>
-						</tr>
-					</thead>
-					<tbody>
+<%@ include file="head.jsp"%>
+<%@ include file="top.jsp"%>
+<div class="container content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+					<div class="panel-body">
+						<button class="btn btn-link btn-none btn-lg pull-right">
+								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						</button>
+						<h3>Reimbursements</h3>
 						<c:forEach var="reim" items="${reims}">
-							<tr>
-								<td><c:out value="${reim.amount}"/></td>
-								<td><c:out value="${reim.type.type}"/></td>
-								<td><c:out value="${reim.description}"/></td>
-								<td><c:out value="${reim.status.status}"/></td>
-								<td><c:out value="${reim.submitted}"/></td>
-								<td><c:out value="${reim.resolved}"/></td>
-								<td><c:out value="${reim.author.username}"/></td>
-								<td><c:out value="${reim.resolver.username}"/></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="pull-right">
+									<c:if test="${ reim.status.status == 'Pending' }">
+										<span class="glyphicon glyphicon-question-sign pending" aria-hidden="true"></span>
+									</c:if>
+									<c:if test="${ reim.status.status == 'Denied' }">
+										<span class="glyphicon glyphicon-remove-sign denied" aria-hidden="true"></span>
+									</c:if>
+									<c:if test="${ reim.status.status == 'Accepted' }">
+										<span class="glyphicon glyphicon-ok-sign accepted" aria-hidden="true"></span>
+									</c:if>	
+									<a href="#" data-toggle="collapse" data-target="#<c:out value="${reim.id}"/>"
+										aria-expanded="false" aria-controls="">
+										<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+									</a>
+								</div>
+								<div>
+								<span class="panel-title"><c:out value="${ reim.type.type }" /></span>
+								<em><fmt:formatNumber type="currency" value="${ reim.amount }" /></em>
+								</div>
+							</div>
+							<div class="panel-body collapse" id="<c:out value="${ reim.id }"/>">
+								<ul class="list-group reim-list">
+									<li class="list-group-item reim-list-item">
+										<b>Description:</b>
+										<c:out value="${ reim.description }"/>
+									</li>
+									<li class="list-group-item reim-list-item">
+										<b>Author:</b>
+										<i><c:out value="${ reim.author.firstName } ${ reim.author.lastName }"/></i>
+									</li>
+									<li class="list-group-item reim-list-item">
+										<b>Submitted:</b>
+										<c:out value="${ reim.submitted }"/>
+									</li>
+									<li class="list-group-item reim-list-item">
+										<b>Resolver:</b>
+										<i><c:out value="${ reim.resolver.firstName } ${ reim.resolver.lastName }"/></i>
+									</li>
+									<li class="list-group-item reim-list-item">
+										<b>Resolved:</b>
+										<i><c:out value="${ reim.resolved }"/></i>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><input type="checkbox" /></th>
+						<th>Amount</th>
+						<th>Type</th>
+						<th>Description</th>
+						<th>Status</th>
+						<th>Submitted</th>
+						<th>Resolved</th>
+						<th>Author</th>
+						<th>Resolver</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="reim" items="${reims}">
+						<tr>
+							<td><input type="checkbox" />
+							<td><c:out value="${reim.amount}" /></td>
+							<td><c:out value="${reim.type.type}" /></td>
+							<td><c:out value="${reim.description}" /></td>
+							<td><c:out value="${reim.status.status}" /></td>
+							<td><c:out value="${reim.submitted}" /></td>
+							<td><c:out value="${reim.resolved}" /></td>
+							<td><c:out value="${reim.author.username}" /></td>
+							<td><c:out value="${reim.resolver.username}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
-</body>
-</html>
+	</div>
+</div>
+<%@ include file="bottom.jsp"%>

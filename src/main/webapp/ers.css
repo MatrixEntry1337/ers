@@ -1,38 +1,74 @@
-.wrappper{
-  background-color: #fff;
+/* Wrapper */
+.wrappper {
+	background-color: #fff;
 }
 
-.content{
-  padding: 5em 4em 0 4em;
+/* Content */
+.content {
+	padding: 0em 2em 0 2em;
 }
 
-/* form */
-.form-signin{
-  padding: 3em;
-  background: #fff;
-  border: solid .1em #e0ebeb;
-  box-shadow: 0 0 .3em #e0ebeb;
+/************* Nav Bar ***************/
+.ers-nav {
+	border-radius: 0;
+	border-color: #e0ebeb; border-right-style : none;
+	border-left-style: none;
+	border-right-style: none;
 }
 
-.form-signin-heading{
-  color: #595959;
-  text-align: center;
-  padding-bottom: 1.5rem;
-  margin-top: .2em;
-  margin-bottom: 1em;
-  border-bottom: solid .05em #eee;
+/************** Sign In **************/
+.form-signin {
+	padding: 3em;
+	background: #fff;
+	border: solid .1em #e0ebeb;
+	box-shadow: 0 0 .3em #e0ebeb;
 }
 
-.form-input{
-  margin-bottom: 1rem;
-  border-radius: 0em;
+.form-signin-heading {
+	color: #595959;
+	text-align: center;
+	padding-bottom: 1.5rem;
+	margin-top: .2em;
+	margin-bottom: 1em;
+	border-bottom: solid .05em #eee;
 }
 
-.form-button{
-  margin-top: 1em;
-  margin-bottom: 3em;
+.form-input {
+	margin-bottom: 1rem;
+	border-radius: 0em;
 }
 
-.btn-lf{
-  border-radius: 0em;
+.form-button {
+	margin-top: 1em;
+	margin-bottom: 3em;
+}
+
+.btn-lf {
+	border-radius: 0em;
+}
+
+/***** Reimbursements *****/
+.pending {
+	color: #1a75ff
+}
+
+.denied {
+	color: #990000
+}
+
+.accepted {
+	color: #009900
+}
+
+.btn-none:focus, .btn-none:active {
+	outline: none !important;
+}
+
+.reim-list {
+	webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, .075);
+	box-shadow: 0 3px 4px rgba(0, 0, 0, .075);
+}
+
+.reim-list-item {
+	border: none;
 }
