@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ers.beans.User;
-import com.ers.service.BusinessFactory;
+import com.ers.business.BusinessFactory;
 
 public class LoginController {
 	private static LoginController INSTANCE = null;

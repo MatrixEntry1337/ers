@@ -23,6 +23,10 @@ public class Dispatcher extends HttpServlet{
 				MainController.getInstance().getUserData(req, resp);
 				break;
 			}
+			case "/ers/secure/createReim.do":{
+				MainController.getInstance().createReim(req, resp);
+				break;
+			}
 			default:{
 				resp.setStatus(404);
 			}

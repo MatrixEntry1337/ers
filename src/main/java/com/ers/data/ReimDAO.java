@@ -21,12 +21,11 @@ class ReimDAO{
 		this.conn = conn;
 	}
 
-	List<Reim> getReims(String username) throws SQLException{
+	List<Reim> getReims(int userId) throws SQLException{
 		List<Reim> list = new ArrayList<Reim>();
-		String sql = "SELECT REIMB_ID, REIMB_AMOUNT, REIMB_RESOLVER,"
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT,"
 				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
 				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
-				+ "	a.ERS_USERS_ID, a.ERS_USERNAME, a.USER_FIRST_NAME, a.USER_LAST_NAME, a.USER_EMAIL,"
 				+ " m.ERS_USERS_ID AS A_USERS_ID,"
 				+ " m.ERS_USERNAME AS A_USERNAME,"
 				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
@@ -37,15 +36,13 @@ class ReimDAO{
 				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
 				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
 				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
-				+ " INNER JOIN ERS_USERS a"
-				+ " ON e.REIMB_AUTHOR = a.ERS_USERS_ID"
 				+ " Left JOIN ERS_USERS m"
 				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
-				+ " WHERE a.ERS_USERNAME = ?";
+				+ " WHERE e.REIMB_AUTHOR = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, username);
+		stmt.setInt(1, userId);
 		ResultSet rs = stmt.executeQuery();
-		mapReimRows(rs, list);
+		mapReimRows(rs, list, true);
 		return list;
 	}
 
@@ -72,11 +69,11 @@ class ReimDAO{
 				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
-		mapReimRows(rs, list);
+		mapReimRows(rs, list, false);
 		return list;
 	}
 
-	private void mapReimRows(ResultSet rs, List<Reim> list) throws SQLException{
+	private void mapReimRows(ResultSet rs, List<Reim> list, boolean userType) throws SQLException{
 		int id, amount;
 		User author, resolver;
 		Status status;
@@ -84,20 +81,36 @@ class ReimDAO{
 		String description;
 		Timestamp submitted, resolved;
 		Reim reim;
-		while(rs.next()){
+		if(userType){
+			while(rs.next()){
+				id = rs.getInt("REIMB_ID");
+				amount = rs.getInt("REIMB_AMOUNT");
+				author = null;
+				resolver = constructUser(rs, false);
+				status = new Status(rs.getInt("REIMB_STATUS_ID"), rs.getString("REIMB_STATUS"));
+				type = new Type(rs.getInt("REIMB_TYPE_ID"), rs.getString("REIMB_TYPE"));
+				description = rs.getString("REIMB_DESCRIPTION");
+				submitted = rs.getTimestamp("REIMB_SUBMITTED");
+				resolved = rs.getTimestamp("REIMB_RESOLVED");
+				reim = new Reim(id, amount, submitted, resolved, description, author, resolver, status, type);
+				list.add(reim);
+			}
+		}else{
+			while(rs.next()){
 
-			id = rs.getInt("REIMB_ID");
-			amount = rs.getInt("REIMB_AMOUNT");
-			author = constructUser(rs, true);
-			resolver = constructUser(rs, false);
-			status = new Status(rs.getInt("REIMB_STATUS_ID"), rs.getString("REIMB_STATUS"));
-			type = new Type(rs.getInt("REIMB_TYPE_ID"), rs.getString("REIMB_TYPE"));
-			description = rs.getString("REIMB_DESCRIPTION");
-			submitted = rs.getTimestamp("REIMB_SUBMITTED");
-			resolved = rs.getTimestamp("REIMB_RESOLVED");
-			reim = new Reim(id, amount, submitted, resolved, description, author, resolver, status, type);
-			list.add(reim);
-		} 
+				id = rs.getInt("REIMB_ID");
+				amount = rs.getInt("REIMB_AMOUNT");
+				author = constructUser(rs, true);
+				resolver = constructUser(rs, false);
+				status = new Status(rs.getInt("REIMB_STATUS_ID"), rs.getString("REIMB_STATUS"));
+				type = new Type(rs.getInt("REIMB_TYPE_ID"), rs.getString("REIMB_TYPE"));
+				description = rs.getString("REIMB_DESCRIPTION");
+				submitted = rs.getTimestamp("REIMB_SUBMITTED");
+				resolved = rs.getTimestamp("REIMB_RESOLVED");
+				reim = new Reim(id, amount, submitted, resolved, description, author, resolver, status, type);
+				list.add(reim);
+			} 
+		}
 	}
 
 	private User constructUser(ResultSet rs, boolean userType) throws SQLException{
@@ -110,6 +123,8 @@ class ReimDAO{
 			firstName = rs.getString("USER_FIRST_NAME");
 			email = rs.getString("USER_EMAIL");
 		}else{
+			if(rs.getString("A_USERNAME") == null)
+				return null;
 			id = rs.getInt("A_USERS_ID");
 			username = rs.getString("A_USERNAME");
 			lastName = rs.getString("A_LAST_NAME");

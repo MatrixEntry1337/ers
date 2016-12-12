@@ -13,7 +13,7 @@ public interface DataFacadeInterface {
 	
 	public List<Reim> getAllReims() throws ServiceUnavailableException;
 	
-	public List<Reim> getUserReims(String username) throws ServiceUnavailableException;
+	public List<Reim> getUserReims(int userId) throws ServiceUnavailableException;
 	
 	public Reim createReim(User author, double amount, Type type, Status status, String description) throws ServiceUnavailableException;
 	

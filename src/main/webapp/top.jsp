@@ -18,10 +18,18 @@
 						<li><a href="#">Link</a></li>
 						<li><a href="#">Link</a></li>
 					</ul>
+					<c:if test="${ user == null }">
 					<a href="login.jsp"><button type="button"
-						class="btn btn-primary btn-sm navbar-btn pull-right">Sign
-						in</button></a>
-					<!--<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>-->
+						class="btn btn-primary btn-sm navbar-btn pull-right">
+						Sign in</button></a>
+					</c:if>
+					<c:if test="${ user != null }">
+						<p class="navbar-text navbar-right">Signed in as 
+							<a href="#" class="navbar-link">
+								<c:out value="${ user.username }"/>
+							</a>
+						</p>
+					</c:if>
 				</div>
 				<!--/.navbar-collapse -->
 			</div>

@@ -1,4 +1,4 @@
-package com.ers.service;
+package com.ers.business;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ class Reimbursement {
 		return reim;
 	}
 
-	//TODO: validate, create then pass Reim then pass it
+	//TODO: validate, then pass Reim 
 	Reim createReim(User user, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException{
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
@@ -58,26 +58,7 @@ class Reimbursement {
 
 	private List<Reim> getUserReims(User user) 
 			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getUsername());
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
 		return list;
-	}
-	
-	public boolean validateAmount(String amt){
-		double amount = Double.valueOf(amt); 
-		
-		if(amount > 0){
-			String amountString = Double.toString(amount);
-			int decimalPoint = amountString.indexOf('.');
-			int numDecimals = amountString.length() - decimalPoint -1;
-			if(numDecimals <= 2){
-				return true;
-			}
-				
-		}
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(Reimbursement.getInstance().validateAmount("0.234"));
 	}
 }

@@ -55,13 +55,13 @@ public class DataFacade implements DataFacadeInterface{
 	}
 	
 	@Override
-	public List<Reim> getUserReims(String username) 
+	public List<Reim> getUserReims(int userId) 
 			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getReims(username);
+			List<Reim> list = dao.getReims(userId);
 			conn.close();
 			return list;
 		}catch(SQLException e){
