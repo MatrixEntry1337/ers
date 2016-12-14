@@ -8,7 +8,7 @@
 					<div class="alert alert-success" role="alert">
 						<p>You are already logged in!</p>
 						<br>
-						<p>Continue to Reimbursements <a href="main.do">here</a></p>
+						<p>Continue to Reimbursements <a href="/ers/secure/main.do">here</a></p>
 					</div>
 					</c:if>
 					

@@ -66,7 +66,7 @@ public class DataFacade implements DataFacadeInterface{
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");			
+			throw new ServiceUnavailableException();			
 		}finally{
 			try {
 				conn.close();
@@ -94,10 +94,10 @@ public class DataFacade implements DataFacadeInterface{
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
+				throw new ServiceUnavailableException();
 			}
 			e.printStackTrace();
-			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
+			throw new ServiceUnavailableException();
 		}finally{
 			try {
 				conn.close();
@@ -120,7 +120,7 @@ public class DataFacade implements DataFacadeInterface{
 			return hashedPassword;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
+			throw new ServiceUnavailableException();
 		}finally{
 			try {
 				conn.close();
@@ -167,7 +167,7 @@ public class DataFacade implements DataFacadeInterface{
 			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException("Database unavailable. Please contact your administrator.");
+			throw new ServiceUnavailableException();
 		}finally{
 			try {
 				conn.rollback();
@@ -178,4 +178,50 @@ public class DataFacade implements DataFacadeInterface{
 			}
 		}
 	}
+
+	@Override
+	public List<Type> getAllTypes() throws ServiceUnavailableException{ 
+		Connection conn = null;
+		try{
+			conn = getConnection();
+			ReimDAO dao = new ReimDAO(conn);
+			List<Type> list = dao.getAllTypes();
+			conn.close();
+			return list;
+		}catch(SQLException e){
+			e.printStackTrace();;
+			throw new ServiceUnavailableException();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public List<Status> getAllStatus() throws ServiceUnavailableException {
+		Connection conn = null;
+		try{
+			conn = getConnection();
+			ReimDAO dao = new ReimDAO(conn);
+			List<Status> list = dao.getAllStatus();
+			conn.close();
+			return list;
+		}catch(SQLException e){
+			e.printStackTrace();;
+			throw new ServiceUnavailableException();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
 }

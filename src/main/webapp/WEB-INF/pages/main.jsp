@@ -3,6 +3,16 @@
 <%@ include file="../../createModal.jsp" %>
 <div class="container content">
 	<div class="row">
+		<div class="col-md-4 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-2">
+			<p class="bg-danger text-danger">
+				<c:out value="${ errorMessage }" />
+			</p>
+			<p class="bg-success test-success">
+				<c:out value="${ successMessage }" />
+			</p>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-4">
 			<div>
 				<div class="panel panel-default">
@@ -27,7 +37,7 @@
 								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 						</button>
 						<h3>Reimbursements</h3>
-						<c:forEach var="reim" items="${reims}">
+						<c:forEach var="reim" items="${ reims }">
 							<c:if test="${ reim.status.status == 'Pending' }">
 								<div class="panel panel-info">
 							</c:if>
@@ -50,7 +60,7 @@
 									</c:if>	
 									<a href="#" data-toggle="collapse" data-target="#<c:out value="${reim.id}"/>"
 										aria-expanded="false" aria-controls="">
-										<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+										<span class="caret"></span>
 									</a>
 								</div>
 								<div>

@@ -20,6 +20,10 @@ public interface BusinessDelegateInterface {
 	public Reim changeStatus(Reim reim, User user, Status status)
 			throws ServiceUnavailableException, UnauthorizedException;
 	
-	public Reim createReim(User user, int amount, Type type, Status status, String description)
+	public Reim createReim(User user, double amount, Type type, Status status, String description)
 			throws ServiceUnavailableException;
+
+	public List<Type> getAllTypes() throws ServiceUnavailableException;
+
+	public List<Status> getAllStatus() throws ServiceUnavailableException;
 }

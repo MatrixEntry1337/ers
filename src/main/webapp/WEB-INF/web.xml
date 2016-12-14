@@ -13,7 +13,8 @@
 		<servlet-name>dispatch</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- Security Filter  -->
 	<filter>
 		<filter-name>security</filter-name>
 		<filter-class>com.ers.security.SecurityFilter</filter-class>
@@ -22,4 +23,7 @@
 		<filter-name>security</filter-name>
 		<url-pattern>/secure/*</url-pattern>
 	</filter-mapping>
+	
+	
+	
 </web-app>

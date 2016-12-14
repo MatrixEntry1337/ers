@@ -74,7 +74,8 @@ class ReimDAO{
 	}
 
 	private void mapReimRows(ResultSet rs, List<Reim> list, boolean userType) throws SQLException{
-		int id, amount;
+		int id; 
+		double amount;
 		User author, resolver;
 		Status status;
 		Type type;
@@ -84,7 +85,7 @@ class ReimDAO{
 		if(userType){
 			while(rs.next()){
 				id = rs.getInt("REIMB_ID");
-				amount = rs.getInt("REIMB_AMOUNT");
+				amount = rs.getDouble("REIMB_AMOUNT");
 				author = null;
 				resolver = constructUser(rs, false);
 				status = new Status(rs.getInt("REIMB_STATUS_ID"), rs.getString("REIMB_STATUS"));
@@ -99,7 +100,7 @@ class ReimDAO{
 			while(rs.next()){
 
 				id = rs.getInt("REIMB_ID");
-				amount = rs.getInt("REIMB_AMOUNT");
+				amount = rs.getDouble("REIMB_AMOUNT");
 				author = constructUser(rs, true);
 				resolver = constructUser(rs, false);
 				status = new Status(rs.getInt("REIMB_STATUS_ID"), rs.getString("REIMB_STATUS"));
@@ -174,7 +175,7 @@ class ReimDAO{
 		stmt.executeQuery();
 	}
 
-	List<Status> allStatuses() throws SQLException{
+	List<Status> getAllStatus() throws SQLException{
 		List<Status> list = new ArrayList<Status>();
 		String sql = "SELECT REIMB_STATUS_ID, REIMB_STATUS"
 				+ " FROM ERS_REIMBURSEMENT_STATUS";
@@ -196,7 +197,7 @@ class ReimDAO{
 		}
 	}
 
-	List<Type> allTypes() throws SQLException{
+	List<Type> getAllTypes() throws SQLException{
 		List<Type> list = new ArrayList<Type>();
 		String sql = "SELECT REIMB_TYPE_ID, REIMB_TYPE"
 				+ " FROM ERS_REIMBURSEMENT_TYPE";
@@ -205,7 +206,7 @@ class ReimDAO{
 		mapTypeRows(rs, list);
 		return list;
 	}
-
+	
 	private void mapTypeRows(ResultSet rs, List<Type> list) throws SQLException{
 		int id;
 		String typeName;

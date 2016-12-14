@@ -22,4 +22,9 @@ public interface DataFacadeInterface {
 	public User getUser(String username) throws ServiceUnavailableException;
 	
 	public void updateReimStatus(int reim, int resolve, int status) throws ServiceUnavailableException;
+
+	public List<Type> getAllTypes() throws ServiceUnavailableException;
+	
+	public List<Status> getAllStatus() throws ServiceUnavailableException;
+	
 }

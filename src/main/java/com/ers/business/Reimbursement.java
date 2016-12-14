@@ -43,6 +43,8 @@ class Reimbursement {
 	}
 
 	public List<Reim> getReims(User user) throws ServiceUnavailableException {
+		// decide based on role if to call reims for a specific user
+		// or to call for all reims
 		if(user.getRole().getRole().equals("Manager"))
 			return getAllReims();
 		return getUserReims(user);
@@ -52,13 +54,19 @@ class Reimbursement {
 	
 	private List<Reim> getAllReims() 
 			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getAllReims();
-		return list;
+		return  DataFactory.getFacade().getAllReims();
 	}
 
 	private List<Reim> getUserReims(User user) 
 			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
-		return list;
+		return DataFactory.getFacade().getUserReims(user.getId());
+	}
+
+	public List<Type> getAllTypes() throws ServiceUnavailableException {
+		return DataFactory.getFacade().getAllTypes(); 
+	}
+	
+	public List<Status> getAllStatus() throws ServiceUnavailableException {
+		return DataFactory.getFacade().getAllStatus();
 	}
 }

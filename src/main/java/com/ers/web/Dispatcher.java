@@ -19,7 +19,11 @@ public class Dispatcher extends HttpServlet{
 				LoginController.getInstance().login(req, resp);
 				break;
 			}
-			case "/ers/main.do":{
+			case "/ers/secure/logout.do": {
+				LoginController.getInstance().logout(req, resp);
+				break;
+			}
+			case "/ers/secure/main.do":{
 				MainController.getInstance().getUserData(req, resp);
 				break;
 			}

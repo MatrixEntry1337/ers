@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="createReim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <form action="/secure/createReim.do" method="post">
+    <form action="/ers/secure/createReim.do" method="post">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -10,8 +10,8 @@
 	      <div class="modal-body">
 	       	<div class="form-group">
 				<label for="amount">Amount:</label>
-	 				<input type="text" class="form-control" name="amount"
-	 					required placeholder="Enter amount..."/>
+	 				<input type="number" class="form-control" name="amount"
+	 					min="0" step="any" required placeholder="Enter amount..."/>
 			</div>
 	       	<div class="form-group">
 	 				<label for="description">Description:</label>
@@ -20,12 +20,11 @@
 			</div>
 			<div class="form-group">
 			  <label for="type">Type:</label>
-			  <select class="form-control" name="type">
+			  <select class="form-control" name="type" name="type" required>
 			    <option></option>
-			    <option>Lodging</option>
-			    <option>Travel</option>
-			    <option>Food</option>
-			    <option>Other</option>
+			  	<c:forEach var="type" items="${ types }">
+			    <option><c:out value="${ type.type }" /></option>
+			   	</c:forEach>
 			  </select>
 			</div>
 	      </div>

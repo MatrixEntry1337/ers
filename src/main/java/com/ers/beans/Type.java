@@ -1,6 +1,6 @@
 package com.ers.beans;
 
-public class Type {
+public class Type{
 	private int id;
 	private String type;
 	
@@ -34,5 +34,6 @@ public class Type {
 	public String toString() {
 		return "Type [id=" + id + ", type=" + type + "]";
 	}
+
 	
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ers.beans.Type;
 import com.ers.beans.User;
 import com.ers.business.BusinessFactory;
 
@@ -53,7 +54,8 @@ public class LoginController {
 		return false;
 	}
 
-	public void login(HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException{
+	public void login(HttpServletRequest req, HttpServletResponse resp ) 
+			throws ServletException, IOException{
 		String username = req.getParameter("username"); 
 		String password = req.getParameter("password");
 
@@ -61,13 +63,15 @@ public class LoginController {
 		if(validateLoginData(username, password)){
 			// create session
 			try{
+				// grab user
 				User user = BusinessFactory.getDelegate()
 						.authenticateUser(username, password);
-				System.out.println("User: " + user);
+
+				//				System.out.println("User: " + user);
 				if(user != null){
 					logSessionData(req, user);
 					// goto next page
-					resp.sendRedirect("main.do");
+					resp.sendRedirect("/ers/secure/main.do");
 				}
 			}catch(AuthenticationException e){
 				e.printStackTrace();
@@ -88,5 +92,14 @@ public class LoginController {
 			req.setAttribute("loginMessage", loginMessage);
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
+	}
+
+	public void logout(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		System.out.println("User logged out");
+//		resp.sendRedirect(req.getServletContext().getContextPath()+ "/login.jsp");
+		resp.sendRedirect("/ers/login.jsp");
 	}
 }
