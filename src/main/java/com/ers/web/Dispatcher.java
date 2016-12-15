@@ -24,11 +24,19 @@ public class Dispatcher extends HttpServlet{
 				break;
 			}
 			case "/ers/secure/main.do":{
-				MainController.getInstance().getUserData(req, resp);
+				DataGrabController.getInstance().getUserData(req, resp);
 				break;
 			}
 			case "/ers/secure/createReim.do":{
-				MainController.getInstance().createReim(req, resp);
+				DataChangeController.getInstance().createReim(req, resp);
+				break;
+			}
+			case "/ers/secure/accept.do":{
+				DataChangeController.getInstance().acceptReim(req, resp);
+				break;
+			}
+			case "/ers/secure/deny.do":{
+				DataChangeController.getInstance().denyReim(req, resp);
 				break;
 			}
 			default:{

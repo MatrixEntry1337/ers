@@ -2,6 +2,7 @@ package com.ers.data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.naming.ServiceUnavailableException;
@@ -156,13 +157,13 @@ public class DataFacade implements DataFacadeInterface{
 	}
 
 	@Override
-	public void updateReimStatus(int reim, int resolver, int status) 
+	public void updateReimStatus(int reim, int resolver, int status, Timestamp ts) 
 			throws ServiceUnavailableException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			dao.setReimStatus(reim, resolver, status);
+			dao.setReimStatus(reim, resolver, status, ts);
 			conn.commit();
 			conn.close();
 		}catch(SQLException e){

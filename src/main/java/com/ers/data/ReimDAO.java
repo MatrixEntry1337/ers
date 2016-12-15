@@ -164,14 +164,16 @@ class ReimDAO{
 		return reim;
 	}
 
-	void setReimStatus(int reim, int resolver, int status) throws SQLException{
+	void setReimStatus(int reim, int resolver, int status, Timestamp ts) throws SQLException{
 		String sql = "UPDATE ERS_REIMBURSEMENT"
-				+ " SET REIMB_STATUS_ID = ?, REIMB_RESOLVER = ?"
+				+ " SET REIMB_STATUS_ID = ?, REIMB_RESOLVER = ?,"
+				+ " REIMB_RESOLVED = ?"
 				+ " WHERE REIMB_ID = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, status);
 		stmt.setInt(2, resolver);
-		stmt.setInt(3, reim);
+		stmt.setTimestamp(3, ts);
+		stmt.setInt(4, reim);
 		stmt.executeQuery();
 	}
 

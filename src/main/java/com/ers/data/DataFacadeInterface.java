@@ -1,5 +1,6 @@
 package com.ers.data;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.naming.ServiceUnavailableException;
@@ -21,7 +22,7 @@ public interface DataFacadeInterface {
 	
 	public User getUser(String username) throws ServiceUnavailableException;
 	
-	public void updateReimStatus(int reim, int resolve, int status) throws ServiceUnavailableException;
+	public void updateReimStatus(int reim, int resolve, int status, Timestamp ts) throws ServiceUnavailableException;
 
 	public List<Type> getAllTypes() throws ServiceUnavailableException;
 	

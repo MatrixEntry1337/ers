@@ -20,7 +20,7 @@
 			</div>
 			<div class="form-group">
 			  <label for="type">Type:</label>
-			  <select class="form-control" name="type" name="type" required>
+			  <select class="form-control" name="type" required>
 			    <option></option>
 			  	<c:forEach var="type" items="${ types }">
 			    <option><c:out value="${ type.type }" /></option>

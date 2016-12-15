@@ -58,14 +58,16 @@
 									<c:if test="${ reim.status.status == 'Accepted' }">
 										<span class="glyphicon glyphicon-ok-sign accepted" aria-hidden="true"></span>
 									</c:if>	
-									<a href="#" data-toggle="collapse" data-target="#<c:out value="${reim.id}"/>"
+									<span data-toggle="collapse" data-target="#<c:out value="${reim.id}"/>"
 										aria-expanded="false" aria-controls="">
 										<span class="caret"></span>
-									</a>
+									</span>
 								</div>
 								<div>
+								<input type="checkbox" name="selectReim">
 								<span class="panel-title"><c:out value="${ reim.type.type } " />-</span>
 								<span class="badge"><em><fmt:formatNumber type="currency" value=" ${ reim.amount }" /></em></span>
+								<span class="shorten"><c:out value="${ reim.description }"/></span>
 								</div>
 							</div>
 							<div class="panel-body collapse" id="<c:out value="${ reim.id }"/>">
@@ -78,7 +80,7 @@
 										<b>Submitted:</b>
 										<fmt:formatDate type="both" value="${ reim.submitted }"/>
 									</li >
-									<c:if test="${ reim.author != null }">
+									<c:if test="${ reim.author != null && user.role.role == 'Manager' }">
 									<li class="list-group-item reim-list-item">
 										<b>Author:</b>
 										<i><c:out value="${ reim.author.firstName } ${ reim.author.lastName }"/></i>
@@ -94,6 +96,22 @@
 										<fmt:formatDate type="both" value="${ reim.resolved }"/>
 									</li>
 									</c:if>
+									<li class="list-group-item reim-list-item reim-list-button">
+									<c:if test="${ user.role.role == 'Manager' }">
+										<div class="pull-right">
+											<form class="manager-action" action="/ers/secure/accept.do" method="post">
+											<button type="submit" class="btn btn-success" 
+												name="acceptReim" value="<c:out value="${ reim.id }"/>">
+												Approve</button>
+											</form>
+											<form class="manager-action" action="/ers/secure/deny.do" method="post">
+											<button type = "submit" class="btn btn-danger"
+												name="denyReim" value="<c:out value="${ reim.id }"/>">
+												Deny</button>
+											</form>
+										</div>
+									</c:if>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -103,4 +121,5 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="/ers/ers.js"></script>
 <%@ include file="../../bottom.jsp"%>

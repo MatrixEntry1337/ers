@@ -1,4 +1,8 @@
 /* Wrapper */
+html{
+	overflow-y: scroll;
+}
+
 .wrappper {
 	background-color: #fff;
 }
@@ -71,4 +75,12 @@
 
 .reim-list-item {
 	border: none;
+}
+
+.reim-list-button{
+	height: 4em;
+}
+
+.manager-action{
+	display: inline-block;
 }

@@ -30,28 +30,28 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 
 	@Override
 	public List<Reim> getReims(User user) throws ServiceUnavailableException{
-		return Reimbursement.getInstance().getReims(user);
+		return ReimService.getInstance().getReims(user);
 	}
 	
 	@Override
 	public Reim changeStatus(Reim reim, User user, Status status) throws ServiceUnavailableException, UnauthorizedException {
-		return Reimbursement.getInstance().changeStatus(reim, user, status);
+		return ReimService.getInstance().changeStatus(reim, user, status);
 	}
 
 
 	@Override
 	public Reim createReim(User user, double amount, Type type, Status status, String description) throws ServiceUnavailableException {
-		return Reimbursement.getInstance().createReim(user, amount, type, status, description);
+		return ReimService.getInstance().createReim(user, amount, type, status, description);
 	}
 
 	@Override
 	public List<Type> getAllTypes() throws ServiceUnavailableException {
-		return Reimbursement.getInstance().getAllTypes();
+		return ReimService.getInstance().getAllTypes();
 	}
 
 	@Override
 	public List<Status> getAllStatus() throws ServiceUnavailableException {
-		return Reimbursement.getInstance().getAllStatus();
+		return ReimService.getInstance().getAllStatus();
 	}
 
 }

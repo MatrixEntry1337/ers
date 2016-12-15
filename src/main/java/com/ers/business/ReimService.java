@@ -1,5 +1,6 @@
 package com.ers.business;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.naming.ServiceUnavailableException;
@@ -11,14 +12,14 @@ import com.ers.beans.User;
 import com.ers.data.DataFactory;
 import com.ers.exception.UnauthorizedException;
 
-class Reimbursement {
-	private static Reimbursement INSTANCE = null;
+class ReimService {
+	private static ReimService INSTANCE = null;
 	
-	private Reimbursement(){}
+	private ReimService(){}
 	
-	synchronized public static Reimbursement getInstance(){
+	synchronized public static ReimService getInstance(){
 		if(INSTANCE == null)
-			INSTANCE = new Reimbursement();
+			INSTANCE = new ReimService();
 		return INSTANCE;
 	}
 
@@ -28,9 +29,11 @@ class Reimbursement {
 		if(!user.getRole().getRole().equals("Manager")){
 			throw new UnauthorizedException();
 		}
-		
-		DataFactory.getFacade().updateReimStatus(reim.getId(), user.getId(), status.getId());
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		DataFactory.getFacade().updateReimStatus(reim.getId(), user.getId(), status.getId(), ts);
 		reim.setStatus(new Status(status.getId(), status.getStatus()));
+		reim.setResolved(ts);
+		reim.setResolver(user);
 		return reim;
 	}
 
