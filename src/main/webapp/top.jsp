@@ -26,17 +26,18 @@
 					</a>
 					</c:if>
 					<c:if test="${ user != null }">
-						<p class="navbar-text navbar-right">Signed in as 
+						<p class="navbar-right sign-in">Signed in as 
 							<a href="#" class="navbar-link">
 								<c:out value="${ user.username }"/>
 							</a>
+							<c:if test="${ user != null }">
+							<a href="/ers/secure/logout.do">
+								<button type="button"
+								class="btn btn-primary btn-sm navbar-btn">
+								Sign Out</button>
+							</a>
+							</c:if>
 						</p>
-					</c:if>
-					<c:if test="${ user != null }">
-					<a href="/ers/secure/logout.do">
-						<button type="button"
-						class="btn btn-primary btn-sm navbar-btn pull-right">
-						Sign Out</button></a>
 					</c:if>
 				</div>
 				<!--/.navbar-collapse -->

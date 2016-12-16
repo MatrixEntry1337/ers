@@ -29,7 +29,7 @@ public class SecurityFilter implements Filter{
 			// they need to login first
 			System.out.println("Not authorized");
 			HttpServletResponse response = (HttpServletResponse) resp;
-			response.setStatus(403); //forbidden
+			response.sendError(403); //forbidden
 		}
 		
 	}

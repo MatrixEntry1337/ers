@@ -40,7 +40,7 @@ public class Dispatcher extends HttpServlet{
 				break;
 			}
 			default:{
-				resp.setStatus(404);
+				resp.sendError(404);
 			}
 		}
 

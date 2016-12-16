@@ -143,6 +143,7 @@ public class DataChangeController {
 			}
 		}
 		
+		// Ilya helped
 		private String createClientMessage(String prefix, String fullDescription ,String postfix){
 			int dLength = fullDescription.length();
 			int maxLength = 28, maxWord = 10;
@@ -151,11 +152,13 @@ public class DataChangeController {
 			if(nextSpace > index && nextSpace - index <= maxWord ){
 				index = nextSpace;
 			}
+			if(dLength - index < 7) index = dLength;
 			String dotString = index < dLength ? "..." : ""; 
 			return prefix + " \"" + fullDescription.substring(0, index) 
 				+ dotString + "\" " + postfix + ".";
 			
 		}
+		
 		
 		public Reim validateReim(List<Reim> reimList, int reimSelected) 
 				throws ValidateException{
@@ -166,6 +169,8 @@ public class DataChangeController {
 				throw new ValidateException(message);
 			}
 			int location = reimList.indexOf(testReim);
+			
+			// checks if reim is already resolved
 			if(reimList.get(location).getResolved() != null){
 				String message = "Please pick a reimbursement that is valid for approval.";
 				throw new ValidateException(message);
@@ -214,16 +219,12 @@ public class DataChangeController {
 				.forward(req, resp);
 			}catch(ServiceUnavailableException e){
 				e.printStackTrace();
-				String message = "Reimbursement cannot be added at this time. "
-						+ "Please try again later.";
-				req.setAttribute("errorMessage", message);
+				req.setAttribute("errorMessage", e.getMessage());
 				req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 				.forward(req, resp);
 			}catch(UnauthorizedException e){
 				e.printStackTrace();
-				String message = "You do do not have enough permission to"
-						+ " accept Reimbursements";
-				req.setAttribute("errorMessage", message);
+				req.setAttribute("errorMessage", e.getMessage());
 				req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 				.forward(req, resp);
 			}

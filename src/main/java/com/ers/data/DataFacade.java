@@ -15,23 +15,27 @@ import com.ers.beans.User;
 
 public class DataFacade implements DataFacadeInterface{
 
+	// message that is sent to to the requester when there is a SQLException
+	private static final String suMessage = "Reimbursement cannot be added at this time. "
+			+ "Please try again later.";
+
 	private static DataFacade INSTANCE = null;
-	
+
 	private DataFacade(){}
-	
+
 	synchronized public static DataFacade getInstance(){
 		if (INSTANCE == null)
 			INSTANCE = new DataFacade();
 		return INSTANCE;
 	}
-	
+
 	private Connection getConnection() 
 			throws SQLException{
 		Connection conn = ServiceLocator.getERSDatabase().getConnection();
 		conn.setAutoCommit(false);
 		return conn;
 	}
-	
+
 	@Override
 	public List<Reim> getAllReims() 
 			throws ServiceUnavailableException{
@@ -40,11 +44,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
 			List<Reim> list = dao.getAllReims();
-			conn.close();
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -54,7 +57,7 @@ public class DataFacade implements DataFacadeInterface{
 			}
 		}
 	}
-	
+
 	@Override
 	public List<Reim> getUserReims(int userId) 
 			throws ServiceUnavailableException{
@@ -63,11 +66,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
 			List<Reim> list = dao.getReims(userId);
-			conn.close();
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException();			
+			throw new ServiceUnavailableException(suMessage);			
 		}finally{
 			try {
 				conn.close();
@@ -87,18 +89,15 @@ public class DataFacade implements DataFacadeInterface{
 			ReimDAO dao = new ReimDAO(conn);
 			Reim reim = dao.insertReim(author, amount, type, status, description);
 			conn.commit();
-			conn.close();
 			return reim;
 		}catch(SQLException e){
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				throw new ServiceUnavailableException();
 			}
 			e.printStackTrace();
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -117,11 +116,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			UserDAO dao = new UserDAO(conn);
 			String hashedPassword = dao.getPassword(username);
-			conn.close();
 			return hashedPassword;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -141,11 +139,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			UserDAO dao = new UserDAO(conn);
 			user = dao.getUser(username);
-			conn.close();
 			return user;
 		}catch(SQLException e){
 			e.printStackTrace();
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -165,13 +162,17 @@ public class DataFacade implements DataFacadeInterface{
 			ReimDAO dao = new ReimDAO(conn);
 			dao.setReimStatus(reim, resolver, status, ts);
 			conn.commit();
-			conn.close();
 		}catch(SQLException e){
-			e.printStackTrace();
-			throw new ServiceUnavailableException();
-		}finally{
 			try {
 				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			throw new ServiceUnavailableException(suMessage);
+		}finally{
+			try {
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -187,11 +188,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
 			List<Type> list = dao.getAllTypes();
-			conn.close();
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();;
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -209,11 +209,10 @@ public class DataFacade implements DataFacadeInterface{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
 			List<Status> list = dao.getAllStatus();
-			conn.close();
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();;
-			throw new ServiceUnavailableException();
+			throw new ServiceUnavailableException(suMessage);
 		}finally{
 			try {
 				conn.close();
@@ -224,5 +223,5 @@ public class DataFacade implements DataFacadeInterface{
 		}
 	}
 
-	
+
 }

@@ -1,8 +1,4 @@
 /* Wrapper */
-html{
-	overflow-y: scroll;
-}
-
 .wrappper {
 	background-color: #fff;
 }
@@ -12,12 +8,20 @@ html{
 	padding: 0em 2em 0 2em;
 }
 
+.center-text{
+	text-align: center;
+}
+
 /************* Nav Bar ***************/
 .ers-nav {
 	border-radius: 0;
 	border-color: #e0ebeb; border-right-style : none;
 	border-left-style: none;
 	border-right-style: none;
+}
+
+.sign-in{
+	margin: 0em;
 }
 
 /************** Sign In **************/
@@ -52,6 +56,12 @@ html{
 }
 
 /***** Reimbursements *****/
+.client-message{
+	text-align: center;
+	border-radius: .5rem;
+	border-style: none;
+}
+
 .pending {
 	color: #1a75ff
 }

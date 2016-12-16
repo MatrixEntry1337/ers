@@ -17,7 +17,7 @@ public interface BusinessDelegateInterface {
 	
 	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
-	public Reim changeStatus(Reim reim, User user, Status status)
+	public void changeStatus(Reim reim, User user, Status status)
 			throws ServiceUnavailableException, UnauthorizedException;
 	
 	public Reim createReim(User user, double amount, Type type, Status status, String description)

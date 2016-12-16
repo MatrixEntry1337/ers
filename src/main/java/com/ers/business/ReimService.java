@@ -23,23 +23,25 @@ class ReimService {
 		return INSTANCE;
 	}
 
-	Reim changeStatus(Reim reim, User user, Status status) 
+	void changeStatus(Reim reim, User user, Status status) 
 			throws ServiceUnavailableException, UnauthorizedException{
 		// ensure user is a manager
 		if(!user.getRole().getRole().equals("Manager")){
-			throw new UnauthorizedException();
+			String message = "You do do not have enough permission to"
+					+ " accept Reimbursements";
+			throw new UnauthorizedException(message);
 		}
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		DataFactory.getFacade().updateReimStatus(reim.getId(), user.getId(), status.getId(), ts);
 		reim.setStatus(new Status(status.getId(), status.getStatus()));
 		reim.setResolved(ts);
 		reim.setResolver(user);
-		return reim;
 	}
 
 	//TODO: validate, then pass Reim 
 	Reim createReim(User user, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException{
+		
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
 		
 		
@@ -55,7 +57,8 @@ class ReimService {
 	
 	/* Helper Functions */
 	
-	private List<Reim> getAllReims() 
+	private List<Reim> getAllReims()
+	//TODO put in pagination here
 			throws ServiceUnavailableException{
 		return  DataFactory.getFacade().getAllReims();
 	}

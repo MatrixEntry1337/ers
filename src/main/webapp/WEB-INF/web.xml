@@ -3,16 +3,45 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
+	
 	<display-name>ERS</display-name>
+	
+	<!-- Main Servlet  -->
 	<servlet>
 		<servlet-name>dispatch</servlet-name>
 		<servlet-class>com.ers.web.Dispatcher</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>dispatch</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Error -->
+	<servlet>
+		<servlet-name>error</servlet-name>
+		<servlet-class>com.ers.web.ErrorServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>error</servlet-name>
+		<url-pattern>/e</url-pattern>
+	</servlet-mapping>
+		
+	<error-page>
+		<error-code>404</error-code>
+		<location>/e</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/e</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/e</location>
+	</error-page>
 	
 	<!-- Security Filter  -->
 	<filter>
@@ -23,7 +52,5 @@
 		<filter-name>security</filter-name>
 		<url-pattern>/secure/*</url-pattern>
 	</filter-mapping>
-	
-	
 	
 </web-app>

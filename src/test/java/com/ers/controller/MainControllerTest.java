@@ -53,6 +53,7 @@ public class MainControllerTest {
 		Reim reim2 = new Reim(2, 45.67, null, new Timestamp(System.currentTimeMillis()), null, null, null, null, null);
 		list.add(reim2);
 		assertEquals(reim1, DataChangeController.getInstance().validateReim(list, 1));
+		assertNotEquals(reim2, DataChangeController.getInstance().validateReim(list, 1));
 	}
 	
 	@Test(expected=ValidateException.class)

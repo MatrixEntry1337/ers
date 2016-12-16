@@ -3,11 +3,11 @@
 <%@ include file="../../createModal.jsp" %>
 <div class="container content">
 	<div class="row">
-		<div class="col-md-4 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-2">
-			<p class="bg-danger text-danger">
+		<div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2">
+			<p class="bg-danger text-danger client-message">
 				<c:out value="${ errorMessage }" />
 			</p>
-			<p class="bg-success test-success">
+			<p class="bg-success test-success client-message">
 				<c:out value="${ successMessage }" />
 			</p>
 		</div>
@@ -32,10 +32,12 @@
 		<div class="col-md-8">
 			<div class="panel panel-default">
 					<div class="panel-body">
+						<c:if test="${ user.role.role == 'Employee' }">
 						<button class="btn btn-link btn-none btn-lg pull-right" 
 						data-toggle="modal" data-target="#createReim">
 								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 						</button>
+						</c:if>
 						<h3>Reimbursements</h3>
 						<c:forEach var="reim" items="${ reims }">
 							<c:if test="${ reim.status.status == 'Pending' }">
@@ -64,7 +66,7 @@
 									</span>
 								</div>
 								<div>
-								<input type="checkbox" name="selectReim">
+								<!-- <input type="checkbox" name="selectReim"> -->
 								<span class="panel-title"><c:out value="${ reim.type.type } " />-</span>
 								<span class="badge"><em><fmt:formatNumber type="currency" value=" ${ reim.amount }" /></em></span>
 								<span class="shorten"><c:out value="${ reim.description }"/></span>
@@ -98,6 +100,7 @@
 									</c:if>
 									<li class="list-group-item reim-list-item reim-list-button">
 									<c:if test="${ user.role.role == 'Manager' }">
+										<c:if test="${ reim.resolved == null }" >
 										<div class="pull-right">
 											<form class="manager-action" action="/ers/secure/accept.do" method="post">
 											<button type="submit" class="btn btn-success" 
@@ -110,6 +113,7 @@
 												Deny</button>
 											</form>
 										</div>
+										</c:if>
 									</c:if>
 									</li>
 								</ul>

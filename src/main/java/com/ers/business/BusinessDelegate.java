@@ -34,8 +34,8 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 	
 	@Override
-	public Reim changeStatus(Reim reim, User user, Status status) throws ServiceUnavailableException, UnauthorizedException {
-		return ReimService.getInstance().changeStatus(reim, user, status);
+	public void changeStatus(Reim reim, User user, Status status) throws ServiceUnavailableException, UnauthorizedException {
+		ReimService.getInstance().changeStatus(reim, user, status);
 	}
 
 
