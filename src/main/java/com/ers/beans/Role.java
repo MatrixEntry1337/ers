@@ -1,6 +1,6 @@
 package com.ers.beans;
 
-public class Role {
+public class Role{
 	
 	private int id;
 	private String role;
@@ -32,6 +32,5 @@ public class Role {
 	public String toString() {
 		return "Role [id=" + id + ", role=" + role + "]";
 	}
-	
 	
 }

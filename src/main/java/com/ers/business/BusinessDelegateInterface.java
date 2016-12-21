@@ -10,6 +10,7 @@ import com.ers.beans.Status;
 import com.ers.beans.Type;
 import com.ers.beans.User;
 import com.ers.exception.UnauthorizedException;
+import com.ers.exception.ValidateException;
 
 public interface BusinessDelegateInterface {
 	public User authenticateUser(String username, String password)
@@ -21,7 +22,7 @@ public interface BusinessDelegateInterface {
 			throws ServiceUnavailableException, UnauthorizedException;
 	
 	public Reim createReim(User user, double amount, Type type, Status status, String description)
-			throws ServiceUnavailableException;
+			throws ServiceUnavailableException, ValidateException;
 
 	public List<Type> getAllTypes() throws ServiceUnavailableException;
 

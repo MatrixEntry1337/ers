@@ -1,6 +1,7 @@
 package com.ers.beans;
 
-public class Type{
+public class Type implements Comparable<Type>{
+	
 	private int id;
 	private String type;
 	
@@ -33,6 +34,11 @@ public class Type{
 	@Override
 	public String toString() {
 		return "Type [id=" + id + ", type=" + type + "]";
+	}
+
+	@Override
+	public int compareTo(Type other) {
+		return this.type.compareTo(other.getType());
 	}
 
 	

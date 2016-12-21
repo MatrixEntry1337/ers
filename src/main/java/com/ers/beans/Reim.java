@@ -1,13 +1,15 @@
 package com.ers.beans;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 
-public class Reim {
+public class Reim implements Comparable<Reim>{
 	private int id;
 	private double amount;
 	private Timestamp submitted;
 	private Timestamp resolved;
 	private String description;
+	private String abbrev;
 	private User author;
 	private User resolver;
 	private Status status;
@@ -17,8 +19,8 @@ public class Reim {
 		super();
 	}
 	
-	public Reim(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author,
-			User resolver, Status status, Type type) {
+	public Reim(int id, double amount, Timestamp submitted, Timestamp resolved, 
+			String description, User author, User resolver, Status status, Type type) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -131,6 +133,29 @@ public class Reim {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	static class ReimStatusComparator implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.status.compareTo(two.status);
+		}
+		
+	}
+	
+	static class ReimTypeComparator implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.type.compareTo(two.type);
+		}
+		
+	}
+	
+	@Override
+	public int compareTo(Reim other) {
+		return this.id - other.id;
 	}
 	
 }

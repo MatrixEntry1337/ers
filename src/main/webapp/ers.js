@@ -14,7 +14,7 @@ function changeDescription(text){
 }
 
 function main(){
-	console.log("The js debug for ERS: ");
+	console.log("The ERS Web App logs: ");
 	// shortens the text for each description
 	$(".shorten").each(function(){
 		// get text from class
@@ -25,6 +25,17 @@ function main(){
 	
 	// fades out client message after 10s
 	$(".client-message").delay(1000*10).fadeOut("slow");
+	
+	
+	// count the number of characters in description
+	$("#reim-describe").keydown(function(){
+		var chars = $("#reim-describe").val();
+		console.log(chars);
+		console.log(chars.length + 1);
+		var numChars = (250 - chars.length) - 1;
+		$("#reim-describe-chars").html(numChars);
+	});
+	
 };
 
 $(document).ready(main());

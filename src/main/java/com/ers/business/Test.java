@@ -10,11 +10,12 @@ import com.ers.beans.Reim;
 import com.ers.beans.Status;
 import com.ers.beans.Type;
 import com.ers.beans.User;
+import com.ers.exception.ValidateException;
 
 
 public class Test {
 	
-	public static void main(String[] args) throws SQLException, AuthenticationException, ServiceUnavailableException {
+	public static void main(String[] args) throws SQLException, AuthenticationException, ServiceUnavailableException, ValidateException {
 		
 		// Test search for user
 		User user = BusinessFactory.getDelegate().authenticateUser("thanks", "password1");

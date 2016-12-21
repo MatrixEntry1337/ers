@@ -11,6 +11,7 @@ import com.ers.beans.Type;
 import com.ers.beans.User;
 import com.ers.data.DataFactory;
 import com.ers.exception.UnauthorizedException;
+import com.ers.exception.ValidateException;
 
 class ReimService {
 	private static ReimService INSTANCE = null;
@@ -38,13 +39,14 @@ class ReimService {
 		reim.setResolver(user);
 	}
 
-	//TODO: validate, then pass Reim 
 	Reim createReim(User user, double amount, Type type, Status status, String description) 
-			throws ServiceUnavailableException{
-		
+			throws ServiceUnavailableException, ValidateException{
+		//TODO: validate, then pass Reim
+		if(amount > 4000){
+			String message = "Please enter a value that is under $4000";
+			throw new ValidateException(message);
+		}
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
-		
-		
 	}
 
 	public List<Reim> getReims(User user) throws ServiceUnavailableException {

@@ -10,6 +10,7 @@ import com.ers.beans.Status;
 import com.ers.beans.Type;
 import com.ers.beans.User;
 import com.ers.exception.UnauthorizedException;
+import com.ers.exception.ValidateException;
 
 public class BusinessDelegate implements BusinessDelegateInterface{
 
@@ -24,7 +25,8 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 	
 	@Override
-	public User authenticateUser(String username, String password) throws AuthenticationException, ServiceUnavailableException {
+	public User authenticateUser(String username, String password) 
+			throws AuthenticationException, ServiceUnavailableException {
 		return Authenticate.getInstance().authenticate(username, password);
 	}
 
@@ -34,13 +36,15 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 	
 	@Override
-	public void changeStatus(Reim reim, User user, Status status) throws ServiceUnavailableException, UnauthorizedException {
+	public void changeStatus(Reim reim, User user, Status status) 
+			throws ServiceUnavailableException, UnauthorizedException {
 		ReimService.getInstance().changeStatus(reim, user, status);
 	}
 
 
 	@Override
-	public Reim createReim(User user, double amount, Type type, Status status, String description) throws ServiceUnavailableException {
+	public Reim createReim(User user, double amount, Type type, Status status, String description) 
+			throws ServiceUnavailableException, ValidateException {
 		return ReimService.getInstance().createReim(user, amount, type, status, description);
 	}
 

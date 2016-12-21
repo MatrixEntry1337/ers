@@ -1,10 +1,10 @@
 package com.ers.beans;
 
-public class Status {
+public class Status implements Comparable<Status>{
 	private int id;
 	private String status;
 	
-	public Status() {
+	public Status(){
 		super();
 	}
 		
@@ -30,6 +30,11 @@ public class Status {
 	@Override
 	public String toString() {
 		return "Status [id=" + id + ", status=" + status + "]";
+	}
+
+	@Override
+	public int compareTo(Status other) {
+		return this.status.compareTo(other.getStatus());
 	}
 
 	

@@ -11,12 +11,14 @@
 	       	<div class="form-group">
 				<label for="amount">Amount:</label>
 	 				<input type="number" class="form-control" name="amount"
-	 					min="0" step="any" required placeholder="Enter amount..."/>
+	 					min="0" step="any" required placeholder="ex. 456.67"/>
 			</div>
 	       	<div class="form-group">
 	 				<label for="description">Description:</label>
-	 				<textarea class="form-control" rows="5" name="description" 
-	 					required placeholder="Enter your description here..."></textarea>
+	 				<textarea id="reim-describe" class="form-control" rows="5" name="description" 
+	 					required placeholder="Enter your description here... limit 250 chars"
+	 					maxLength="250"></textarea>
+	 				<small id="reim-describe-chars" class="pull-right">250</small>
 			</div>
 			<div class="form-group">
 			  <label for="type">Type:</label>

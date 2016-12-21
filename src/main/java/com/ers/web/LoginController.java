@@ -45,8 +45,6 @@ public class LoginController {
 
 	private boolean validateLoginData(String username, String password){
 		if(username != null && password != null){
-			username = username.trim();
-			password = password.trim();
 			if(username.length() > 4 && password.length() > 4){
 				return true;
 			}
@@ -58,7 +56,10 @@ public class LoginController {
 			throws ServletException, IOException{
 		String username = req.getParameter("username"); 
 		String password = req.getParameter("password");
-
+		
+		// trim before validating
+		username = username.trim();
+		password = password.trim();
 
 		if(validateLoginData(username, password)){
 			// create session
@@ -97,9 +98,9 @@ public class LoginController {
 	public void logout(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		// removes all the data from the session
 		session.invalidate();
 		System.out.println("User logged out");
-//		resp.sendRedirect(req.getServletContext().getContextPath()+ "/login.jsp");
 		resp.sendRedirect("/ers/login.jsp");
 	}
 }
