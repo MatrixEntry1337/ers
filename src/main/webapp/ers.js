@@ -28,11 +28,11 @@ function main(){
 	
 	
 	// count the number of characters in description
-	$("#reim-describe").keydown(function(){
+	$("#reim-describe").keyup(function(){
 		var chars = $("#reim-describe").val();
 		console.log(chars);
 		console.log(chars.length + 1);
-		var numChars = (250 - chars.length) - 1;
+		var numChars = 250 - chars.length;
 		$("#reim-describe-chars").html(numChars);
 	});
 	
