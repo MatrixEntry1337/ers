@@ -49,7 +49,7 @@ class ReimService {
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
 	}
 
-	public List<Reim> getReims(User user) throws ServiceUnavailableException {
+	List<Reim> getReims(User user) throws ServiceUnavailableException {
 		// decide based on role if to call reims for a specific user
 		// or to call for all reims
 		if(user.getRole().getRole().equals("Manager"))
@@ -65,16 +65,18 @@ class ReimService {
 		return  DataFactory.getFacade().getAllReims();
 	}
 
-	private List<Reim> getUserReims(User user) 
+	List<Reim> getUserReims(User user) 
 			throws ServiceUnavailableException{
 		return DataFactory.getFacade().getUserReims(user.getId());
 	}
 
-	public List<Type> getAllTypes() throws ServiceUnavailableException {
+	List<Type> getAllTypes() throws ServiceUnavailableException {
 		return DataFactory.getFacade().getAllTypes(); 
 	}
 	
-	public List<Status> getAllStatus() throws ServiceUnavailableException {
+	List<Status> getAllStatus() throws ServiceUnavailableException {
 		return DataFactory.getFacade().getAllStatus();
 	}
+	
+	//TODO sort algos here
 }
