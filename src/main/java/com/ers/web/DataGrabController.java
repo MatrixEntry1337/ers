@@ -39,7 +39,7 @@ public class DataGrabController{
 			List<Reim> reimList = BusinessFactory.getDelegate().getReims(user);
 			session.setAttribute("reims", reimList);
 			session.setAttribute("currentSort", 1);
-			
+
 			// will load types and status only once
 			if(session.getAttribute("types") == null){
 				// grab data
@@ -57,60 +57,80 @@ public class DataGrabController{
 			resp.sendError(500);
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public void getAccepted(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		HttpSession session = req.getSession();
-		List<Reim> original = (List<Reim>)session.getAttribute("reims");
-		
-		session.setAttribute("currentSort", 2);
-		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
-		.forward(req, resp);
+		User user = (User)session.getAttribute("user");
+
+		try {
+			List<Reim> accepted = BusinessFactory.getDelegate().getAccepted(user);
+			session.setAttribute("reims", accepted);
+			session.setAttribute("currentSort", 2);
+			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+			.forward(req, resp);
+		} catch (ServiceUnavailableException e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public void getDenied(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		HttpSession session = req.getSession();
-		List<Reim> original = (List<Reim>)session.getAttribute("reims");
-		
-		session.setAttribute("currentSort", 3);
-		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
-		.forward(req, resp);
+		User user = (User)session.getAttribute("user");
+
+		try {
+			List<Reim> denied = BusinessFactory.getDelegate().getDenied(user);
+			session.setAttribute("reims", denied);
+			session.setAttribute("currentSort", 3);
+			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+			.forward(req, resp);
+		} catch (ServiceUnavailableException e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public void getPending(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		HttpSession session = req.getSession();
-		List<Reim> original = (List<Reim>)session.getAttribute("reims");
-		
-		session.setAttribute("currentSort", 4);
-		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
-		.forward(req, resp);
+		User user = (User)session.getAttribute("user");
+
+		try {
+			List<Reim> pending = BusinessFactory.getDelegate().getPending(user);
+			session.setAttribute("reims", pending);
+			session.setAttribute("currentSort", 4);
+			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+			.forward(req, resp);
+		} catch (ServiceUnavailableException e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void getDateAscend(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
-		
+
 		session.setAttribute("currentSort", 5);
 		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 		.forward(req, resp);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void getDateDescend(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
-		
+
+		BusinessFactory.getDelegate().getDateDescend(original);
+
 		session.setAttribute("currentSort", 6);
 		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 		.forward(req, resp);
 	}
-	
+
 }

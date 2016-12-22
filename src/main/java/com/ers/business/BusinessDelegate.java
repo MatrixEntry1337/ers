@@ -41,7 +41,6 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 		ReimService.getInstance().changeStatus(reim, user, status);
 	}
 
-
 	@Override
 	public Reim createReim(User user, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException, ValidateException {
@@ -59,21 +58,18 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 
 	@Override
-	public List<Reim> getAccepted(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reim> getAccepted(User user) throws ServiceUnavailableException {
+		return ReimService.getInstance().acceptedOnly(user);
 	}
 
 	@Override
-	public List<Reim> getDenied(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reim> getDenied(User user) throws ServiceUnavailableException {
+		return ReimService.getInstance().deniedOnly(user);
 	}
 
 	@Override
-	public List<Reim> getPending(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reim> getPending(User user) throws ServiceUnavailableException {
+		return ReimService.getInstance().pendingOnly(user);
 	}
 
 	@Override

@@ -83,15 +83,37 @@ class ReimService {
 	}
 	
 	//TODO sort algos here
-	List<Reim> acceptedOnly(List<Reim> original){
-		List<Reim> returnList = new ArrayList<Reim>();
-		
-		for(Reim each: original){
+	List<Reim> acceptedOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
+		List<Reim> acceptedList = new ArrayList<Reim>();
+		for(Reim each: list){
 			if(each.getStatus().getStatus().equals("Accepted"))
-			returnList.add(each);
+			acceptedList.add(each);
 		}
 		
-		return returnList;
+		return acceptedList;
+	}
+	
+	List<Reim> deniedOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
+		List<Reim> deniedList = new ArrayList<Reim>();
+		for(Reim each: list){
+			if(each.getStatus().getStatus().equals("Denied"))
+			deniedList.add(each);
+		}
+		
+		return deniedList;
+	}
+	
+	List<Reim> pendingOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
+		List<Reim> pendingList = new ArrayList<Reim>();
+		for(Reim each: list){
+			if(each.getStatus().getStatus().equals("Pending"))
+			pendingList.add(each);
+		}
+		
+		return pendingList;
 	}
 	
 }

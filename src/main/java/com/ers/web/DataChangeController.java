@@ -124,6 +124,7 @@ public class DataChangeController {
 					Reim newReim = BusinessFactory.getDelegate().createReim(user, amount, type, status, description);
 					@SuppressWarnings("unchecked")
 					List<Reim> reimList = (List<Reim>) session.getAttribute("reims");
+					// TODO sort check
 					reimList.add(newReim);
 					session.setAttribute("reims", reimList);
 

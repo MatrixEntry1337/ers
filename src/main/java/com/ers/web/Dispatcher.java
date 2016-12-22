@@ -51,11 +51,11 @@ public class Dispatcher extends HttpServlet{
 				DataGrabController.getInstance().getPending(req, resp);
 				break;
 			}
-			case "ers/secure/dateAscend.do":{
+			case "/ers/secure/dateAscend.do":{
 				DataGrabController.getInstance().getDateAscend(req, resp);
 				break;
 			}
-			case "ers/secure/dateDescend.do":{
+			case "/ers/secure/dateDescend.do":{
 				DataGrabController.getInstance().getDateDescend(req, resp);
 				break;
 			}

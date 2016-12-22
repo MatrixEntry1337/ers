@@ -18,11 +18,11 @@ public interface BusinessDelegateInterface {
 	
 	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
-	public List<Reim> getAccepted(List<Reim> original);
+	public List<Reim> getAccepted(User user) throws ServiceUnavailableException;
 	
-	public List<Reim> getDenied(List<Reim> original);
+	public List<Reim> getDenied(User user) throws ServiceUnavailableException;
 	
-	public List<Reim> getPending(List<Reim> original);
+	public List<Reim> getPending(User user) throws ServiceUnavailableException;
 	
 	public List<Reim> geStatusAscend(List<Reim> original);
 	
@@ -45,4 +45,5 @@ public interface BusinessDelegateInterface {
 	public List<Type> getAllTypes() throws ServiceUnavailableException;
 
 	public List<Status> getAllStatus() throws ServiceUnavailableException;
+
 }

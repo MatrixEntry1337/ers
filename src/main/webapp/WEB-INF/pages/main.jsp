@@ -15,24 +15,21 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="list-group">
-						  <a href="/ers/secure/main.do" class="list-group-item 
-						  <c:if test="${currentSort==1}">active</c:if>">All</a>
-              		      <a href="/ers/secure/accepted.do" class="list-group-item 
-              		      <c:if test="${currentSort==2}">active</c:if>">Accepted</a>
-						  <a href="/ers/secure/denied.do" class="list-group-item
-						  <c:if test="${currentSort==3}">active</c:if>">Denied</a>
-						  <a href="/ers/secure/pending.do" class="list-group-item
-						  <c:if test="${currentSort==4}">active</c:if>">Pending</a>
-						  <a href="/ers/secure/dateAscend.do" class="list-group-item
-						  <c:if test="${currentSort==5}">active</c:if>">Date Ascending</a>
-						  <a href="/ers/secure/dateDescend.do" class="list-group-item
-						  <c:if test="${currentSort==6}">active</c:if>">Date Descending</a>
-						</div>
-					</div>
-				</div>
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation" class="<c:if test="${currentSort==1}">active</c:if>">
+						<a href="/ers/secure/main.do">All</a>					
+					</li>
+					 
+					<li role="presentation" class="<c:if test="${currentSort==2}">active</c:if>">
+						<a href="/ers/secure/accepted.do">Accepted</a>
+					</li> 
+					<li role="presentation" class="<c:if test="${currentSort==3}">active</c:if>">
+						<a href="/ers/secure/denied.do">Denied</a>
+					</li> 
+					<li role="presentation" class="<c:if test="${currentSort==4}">active</c:if>">
+						<a href="/ers/secure/pending.do">Pending</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-md-8">
