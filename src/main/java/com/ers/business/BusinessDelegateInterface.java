@@ -18,6 +18,24 @@ public interface BusinessDelegateInterface {
 	
 	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
+	public List<Reim> getAccepted(List<Reim> original);
+	
+	public List<Reim> getDenied(List<Reim> original);
+	
+	public List<Reim> getPending(List<Reim> original);
+	
+	public List<Reim> geStatusAscend(List<Reim> original);
+	
+	public List<Reim> getStatusDescend(List<Reim> original);
+	
+	public List<Reim> getTypeAscend(List<Reim> original);
+	
+	public List<Reim> getTypeDescend(List<Reim> orignal);
+	
+	public List<Reim> getDateAscend(List<Reim> original);
+	
+	public List<Reim> getDateDescend(List<Reim> original);
+	
 	public void changeStatus(Reim reim, User user, Status status)
 			throws ServiceUnavailableException, UnauthorizedException;
 	

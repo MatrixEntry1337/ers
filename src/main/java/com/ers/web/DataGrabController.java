@@ -38,7 +38,8 @@ public class DataGrabController{
 		try{
 			List<Reim> reimList = BusinessFactory.getDelegate().getReims(user);
 			session.setAttribute("reims", reimList);
-
+			session.setAttribute("currentSort", 1);
+			
 			// will load types and status only once
 			if(session.getAttribute("types") == null){
 				// grab data
@@ -58,38 +59,58 @@ public class DataGrabController{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void getAccepted(HttpServletRequest req, HttpServletResponse resp){
+	public void getAccepted(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
 		
+		session.setAttribute("currentSort", 2);
+		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+		.forward(req, resp);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void getDenied(HttpServletRequest req, HttpServletResponse resp){
+	public void getDenied(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
 		
+		session.setAttribute("currentSort", 3);
+		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+		.forward(req, resp);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void getPending(HttpServletRequest req, HttpServletResponse resp){
+	public void getPending(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
 		
+		session.setAttribute("currentSort", 4);
+		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+		.forward(req, resp);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void dateAscend(HttpServletRequest req, HttpServletResponse resp){
+	public void getDateAscend(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
 		
+		session.setAttribute("currentSort", 5);
+		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+		.forward(req, resp);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void dateDescend(HttpServletRequest req, HttpServletResponse resp){
+	public void getDateDescend(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		List<Reim> original = (List<Reim>)session.getAttribute("reims");
 		
+		session.setAttribute("currentSort", 6);
+		req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
+		.forward(req, resp);
 	}
 	
 }

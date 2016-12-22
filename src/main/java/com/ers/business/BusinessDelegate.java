@@ -58,4 +58,58 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 		return ReimService.getInstance().getAllStatus();
 	}
 
+	@Override
+	public List<Reim> getAccepted(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getDenied(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getPending(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> geStatusAscend(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getStatusDescend(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getTypeAscend(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getTypeDescend(List<Reim> orignal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getDateAscend(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reim> getDateDescend(List<Reim> original) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

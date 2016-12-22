@@ -40,25 +40,29 @@ public class Dispatcher extends HttpServlet{
 				break;
 			}
 			case "/ers/secure/accepted.do":{
+				DataGrabController.getInstance().getAccepted(req, resp);
 				break;
 			}
 			case "/ers/secure/denied.do":{
+				DataGrabController.getInstance().getDenied(req, resp);
 				break;
 			}
 			case "/ers/secure/pending.do":{
+				DataGrabController.getInstance().getPending(req, resp);
 				break;
 			}
-			case "ers/secure/dateAsc.do":{
+			case "ers/secure/dateAscend.do":{
+				DataGrabController.getInstance().getDateAscend(req, resp);
 				break;
 			}
-			case "ers/secure/dateDesc.do":{
+			case "ers/secure/dateDescend.do":{
+				DataGrabController.getInstance().getDateDescend(req, resp);
 				break;
 			}
 			default:{
 				resp.sendError(404);
 			}
 		}
-
 	}
 
 	@Override

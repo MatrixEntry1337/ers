@@ -18,12 +18,18 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="list-group">
-						  <a href="#" class="list-group-item active">All</a>
-						  <a href="#" class="list-group-item">Accepted</a>
-						  <a href="#" class="list-group-item">Denied</a>
-						  <a href="#" class="list-group-item">Pending</a>
-						  <a href="#" class="list-group-item">Date Ascending</a>
-						  <a href="#" class="list-group-item">Date Descending</a>
+						  <a href="/ers/secure/main.do" class="list-group-item 
+						  <c:if test="${currentSort==1}">active</c:if>">All</a>
+              		      <a href="/ers/secure/accepted.do" class="list-group-item 
+              		      <c:if test="${currentSort==2}">active</c:if>">Accepted</a>
+						  <a href="/ers/secure/denied.do" class="list-group-item
+						  <c:if test="${currentSort==3}">active</c:if>">Denied</a>
+						  <a href="/ers/secure/pending.do" class="list-group-item
+						  <c:if test="${currentSort==4}">active</c:if>">Pending</a>
+						  <a href="/ers/secure/dateAscend.do" class="list-group-item
+						  <c:if test="${currentSort==5}">active</c:if>">Date Ascending</a>
+						  <a href="/ers/secure/dateDescend.do" class="list-group-item
+						  <c:if test="${currentSort==6}">active</c:if>">Date Descending</a>
 						</div>
 					</div>
 				</div>
@@ -103,14 +109,14 @@
 										<c:if test="${ reim.resolved == null }" >
 										<div class="pull-right">
 											<form class="manager-action" action="/ers/secure/accept.do" method="post">
-											<button type="submit" class="btn btn-success" 
-												name="acceptReim" value="<c:out value="${ reim.id }"/>">
-												Approve</button>
+												<button type="submit" class="btn btn-success" 
+													name="acceptReim" value="<c:out value="${ reim.id }"/>">
+													Approve</button>
 											</form>
 											<form class="manager-action" action="/ers/secure/deny.do" method="post">
-											<button type = "submit" class="btn btn-danger"
-												name="denyReim" value="<c:out value="${ reim.id }"/>">
-												Deny</button>
+												<button type = "submit" class="btn btn-danger"
+													name="denyReim" value="<c:out value="${ reim.id }"/>">
+													Deny</button>
 											</form>
 										</div>
 										</c:if>
