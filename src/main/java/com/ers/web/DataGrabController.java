@@ -56,4 +56,40 @@ public class DataGrabController{
 			resp.sendError(500);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void getAccepted(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		List<Reim> original = (List<Reim>)session.getAttribute("reims");
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getDenied(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		List<Reim> original = (List<Reim>)session.getAttribute("reims");
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getPending(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		List<Reim> original = (List<Reim>)session.getAttribute("reims");
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void dateAscend(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		List<Reim> original = (List<Reim>)session.getAttribute("reims");
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void dateDescend(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		List<Reim> original = (List<Reim>)session.getAttribute("reims");
+		
+	}
+	
 }

@@ -1,6 +1,8 @@
 package com.ers.business;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.naming.ServiceUnavailableException;
@@ -67,7 +69,9 @@ class ReimService {
 
 	List<Reim> getUserReims(User user) 
 			throws ServiceUnavailableException{
-		return DataFactory.getFacade().getUserReims(user.getId());
+		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
+		Collections.sort(list);
+		return list;
 	}
 
 	List<Type> getAllTypes() throws ServiceUnavailableException {
@@ -79,4 +83,15 @@ class ReimService {
 	}
 	
 	//TODO sort algos here
+	List<Reim> acceptedOnly(List<Reim> original){
+		List<Reim> returnList = new ArrayList<Reim>();
+		
+		for(Reim each: original){
+			if(each.getStatus().getStatus().equals("Accepted"))
+			returnList.add(each);
+		}
+		
+		return returnList;
+	}
+	
 }

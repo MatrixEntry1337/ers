@@ -175,7 +175,7 @@ public class Reim implements Comparable<Reim>{
 	
 	@Override
 	public int compareTo(Reim other) {
-		return this.id - other.id;
+		return other.id - this.id;
 	}
 	
 }
