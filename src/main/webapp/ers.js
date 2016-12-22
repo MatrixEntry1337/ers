@@ -1,4 +1,3 @@
-
 // creates shorten message 
 function changeDescription(text){
 	var textLength = text.length;
@@ -26,12 +25,9 @@ function main(){
 	// fades out client message after 10s
 	$(".client-message").delay(1000*10).fadeOut("slow");
 	
-	
 	// count the number of characters in description
 	$("#reim-describe").keyup(function(){
 		var chars = $("#reim-describe").val();
-		console.log(chars);
-		console.log(chars.length + 1);
 		var numChars = 250 - chars.length;
 		$("#reim-describe-chars").html(numChars);
 	});

@@ -39,6 +39,21 @@ public class Dispatcher extends HttpServlet{
 				DataChangeController.getInstance().denyReim(req, resp);
 				break;
 			}
+			case "/ers/secure/accepted.do":{
+				break;
+			}
+			case "/ers/secure/denied.do":{
+				break;
+			}
+			case "/ers/secure/pending.do":{
+				break;
+			}
+			case "ers/secure/dateAsc.do":{
+				break;
+			}
+			case "ers/secure/dateDesc.do":{
+				break;
+			}
 			default:{
 				resp.sendError(404);
 			}
