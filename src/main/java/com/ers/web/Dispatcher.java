@@ -43,6 +43,7 @@ public class Dispatcher extends HttpServlet{
 				DataGrabController.getInstance().getAccepted(req, resp);
 				break;
 			}
+			// todo input type
 			case "/ers/secure/denied.do":{
 				DataGrabController.getInstance().getDenied(req, resp);
 				break;

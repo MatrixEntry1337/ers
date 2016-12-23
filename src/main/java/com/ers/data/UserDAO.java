@@ -48,7 +48,7 @@ class UserDAO {
 		return null;
 	}
 
-	public String getPassword(String username) throws SQLException{
+	String getPassword(String username) throws SQLException{
 		String password = null; 
 		String sql = "SELECT ERS_USERNAME, ERS_PASSWORD FROM ERS_USERS WHERE ERS_USERNAME = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);

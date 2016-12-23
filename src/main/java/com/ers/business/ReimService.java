@@ -64,7 +64,9 @@ class ReimService {
 	private List<Reim> getAllReims()
 	//TODO put in pagination here
 			throws ServiceUnavailableException{
-		return  DataFactory.getFacade().getAllReims();
+		List<Reim> list = DataFactory.getFacade().getAllReims();
+		Collections.sort(list);
+		return list;
 	}
 
 	List<Reim> getUserReims(User user) 
@@ -82,38 +84,38 @@ class ReimService {
 		return DataFactory.getFacade().getAllStatus();
 	}
 	
-	//TODO sort algos here
-	List<Reim> acceptedOnly(User user) throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
-		List<Reim> acceptedList = new ArrayList<Reim>();
-		for(Reim each: list){
-			if(each.getStatus().getStatus().equals("Accepted"))
-			acceptedList.add(each);
+	// TODO sort algos here
+	List<Reim> getAcceptedOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list;
+		if(user.getRole().getRole().equals("Manager")){
+			list = DataFactory.getFacade().getAllAcceptedReims();
+		}else{
+			list = DataFactory.getFacade().getUserAcceptedReims(user.getId());
 		}
-		
-		return acceptedList;
+		Collections.sort(list);
+		return list;
 	}
 	
-	List<Reim> deniedOnly(User user) throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
-		List<Reim> deniedList = new ArrayList<Reim>();
-		for(Reim each: list){
-			if(each.getStatus().getStatus().equals("Denied"))
-			deniedList.add(each);
+	List<Reim> getDeniedOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list;
+		if(user.getRole().getRole().equals("Manager")){
+			list = DataFactory.getFacade().getAllDeniedReims();
+		}else{
+			list = DataFactory.getFacade().getUserDeniedReims(user.getId());
 		}
-		
-		return deniedList;
+		Collections.sort(list);
+		return list;
 	}
 	
-	List<Reim> pendingOnly(User user) throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
-		List<Reim> pendingList = new ArrayList<Reim>();
-		for(Reim each: list){
-			if(each.getStatus().getStatus().equals("Pending"))
-			pendingList.add(each);
+	List<Reim> getPendingOnly(User user) throws ServiceUnavailableException{
+		List<Reim> list;
+		if(user.getRole().getRole().equals("Manager")){
+			list = DataFactory.getFacade().getAllPendingReims();
+		}else{
+			list = DataFactory.getFacade().getUserPendingReims(user.getId());
 		}
-		
-		return pendingList;
+		Collections.sort(list);
+		return list;
 	}
 	
 }

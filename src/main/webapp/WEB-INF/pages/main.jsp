@@ -29,6 +29,7 @@
 					<li role="presentation" class="<c:if test="${currentSort==4}">active</c:if>">
 						<a href="/ers/secure/pending.do">Pending</a>
 					</li>
+					
 				</ul>
 			</div>
 		</div>

@@ -14,14 +14,15 @@ import com.ers.beans.Type;
 import com.ers.beans.User;
 
 class ReimDAO{
+	
 	private Connection conn;
 
 	ReimDAO(Connection conn){
 		super();
 		this.conn = conn;
 	}
-
-	List<Reim> getReims(int userId) throws SQLException{
+	
+	List<Reim> getUserReims(int userId) throws SQLException{
 		List<Reim> list = new ArrayList<Reim>();
 		String sql = "SELECT REIMB_ID, REIMB_AMOUNT,"
 				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
@@ -46,6 +47,84 @@ class ReimDAO{
 		return list;
 	}
 
+	List<Reim> getUserAcceptedReims(int userId) throws SQLException{
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ " WHERE e.REIMB_AUTHOR = ?"
+				+ " AND s.REIMB_STATUS = 'Accepted'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, userId);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, true);
+		return list;
+	}
+	
+	List<Reim> getUserDeniedReims(int userId) throws SQLException{
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ " WHERE e.REIMB_AUTHOR = ?"
+				+ " AND s.REIMB_STATUS = 'Denied'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, userId);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, true);
+		return list;
+	}
+	
+	List<Reim> getUserPendingReims(int userId) throws SQLException{
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ " WHERE e.REIMB_AUTHOR = ?"
+				+ " AND s.REIMB_STATUS = 'Pending'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, userId);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, true);
+		return list;
+	}
+	
 	List<Reim> getAllReims()throws SQLException {
 
 		List<Reim> list = new ArrayList<Reim>();
@@ -73,6 +152,90 @@ class ReimDAO{
 		return list;
 	}
 
+	List<Reim> getAllAcceptedReims()throws SQLException {
+
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT, REIMB_RESOLVER,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ "	a.ERS_USERS_ID, a.ERS_USERNAME, a.USER_FIRST_NAME, a.USER_LAST_NAME, a.USER_EMAIL,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " INNER JOIN ERS_USERS a"
+				+ " ON e.REIMB_AUTHOR = a.ERS_USERS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ "	WHERE s.REIMB_STATUS = 'Accepted'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, false);
+		return list;
+	}
+	
+	List<Reim> getAllDeniedReims()throws SQLException {
+
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT, REIMB_RESOLVER,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ "	a.ERS_USERS_ID, a.ERS_USERNAME, a.USER_FIRST_NAME, a.USER_LAST_NAME, a.USER_EMAIL,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " INNER JOIN ERS_USERS a"
+				+ " ON e.REIMB_AUTHOR = a.ERS_USERS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ "	WHERE s.REIMB_STATUS = 'Denied'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, false);
+		return list;
+	}
+	
+	List<Reim> getAllPendingReims()throws SQLException {
+
+		List<Reim> list = new ArrayList<Reim>();
+		String sql = "SELECT REIMB_ID, REIMB_AMOUNT, REIMB_RESOLVER,"
+				+ " s.REIMB_STATUS_ID, s.REIMB_STATUS, t.REIMB_TYPE_ID, t.REIMB_TYPE,"
+				+ " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
+				+ "	a.ERS_USERS_ID, a.ERS_USERNAME, a.USER_FIRST_NAME, a.USER_LAST_NAME, a.USER_EMAIL,"
+				+ " m.ERS_USERS_ID AS A_USERS_ID,"
+				+ " m.ERS_USERNAME AS A_USERNAME,"
+				+ " m.USER_FIRST_NAME AS A_FIRST_NAME,"
+				+ " m.USER_LAST_NAME AS A_LAST_NAME,"
+				+ " m.USER_EMAIL AS A_EMAIL"
+				+ " FROM ERS_REIMBURSEMENT e"
+				+ " JOIN ERS_REIMBURSEMENT_TYPE t"
+				+ " ON e.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
+				+ " JOIN ERS_REIMBURSEMENT_STATUS s"
+				+ " ON e.REIMB_STATUS_ID = s.REIMB_STATUS_ID"
+				+ " INNER JOIN ERS_USERS a"
+				+ " ON e.REIMB_AUTHOR = a.ERS_USERS_ID"
+				+ " Left JOIN ERS_USERS m"
+				+ " ON e.REIMB_RESOLVER = m.ERS_USERS_ID"
+				+ "	WHERE s.REIMB_STATUS = 'Pending'";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		mapReimRows(rs, list, false);
+		return list;
+	}
+	
 	private void mapReimRows(ResultSet rs, List<Reim> list, boolean userType) throws SQLException{
 		int id; 
 		double amount;
