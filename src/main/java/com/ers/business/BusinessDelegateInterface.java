@@ -18,11 +18,7 @@ public interface BusinessDelegateInterface {
 	
 	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
-	public List<Reim> getAccepted(User user) throws ServiceUnavailableException;
-	
-	public List<Reim> getDenied(User user) throws ServiceUnavailableException;
-	
-	public List<Reim> getPending(User user) throws ServiceUnavailableException;
+	public List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException;
 	
 	public List<Reim> geStatusAscend(List<Reim> original);
 	

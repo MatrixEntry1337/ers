@@ -14,19 +14,15 @@ public interface DataFacadeInterface {
 	
 	public List<Reim> getAllReims() throws ServiceUnavailableException;
 	
-	public List<Reim> getAllAcceptedReims() throws ServiceUnavailableException;
+	public List<Reim> getAllReimsByStatus(String status) throws ServiceUnavailableException;
 	
-	public List<Reim> getAllDeniedReims() throws ServiceUnavailableException;
-	
-	public List<Reim> getAllPendingReims() throws ServiceUnavailableException;
+	public List<Reim> getAllReimsByType(String type) throws ServiceUnavailableException;
 	
 	public List<Reim> getUserReims(int userId) throws ServiceUnavailableException;
 	
-	public List<Reim> getUserAcceptedReims(int userId) throws ServiceUnavailableException;
+	public List<Reim> getUserReimsByStatus(int userId, String status) throws ServiceUnavailableException;
 	
-	public List<Reim> getUserDeniedReims(int userId) throws ServiceUnavailableException;
-	
-	public List<Reim> getUserPendingReims(int userId) throws ServiceUnavailableException;
+	public List<Reim> getUserReimsByType(int userId, String status) throws ServiceUnavailableException;
 	
 	public Reim createReim(User author, double amount, Type type, Status status, String description) throws ServiceUnavailableException;
 	

@@ -64,7 +64,7 @@ public class DataGrabController{
 		User user = (User)session.getAttribute("user");
 
 		try {
-			List<Reim> accepted = BusinessFactory.getDelegate().getAccepted(user);
+			List<Reim> accepted = BusinessFactory.getDelegate().getReimByStatus(user, "Accepted");
 			session.setAttribute("reims", accepted);
 			session.setAttribute("currentSort", 2);
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
@@ -81,7 +81,7 @@ public class DataGrabController{
 		User user = (User)session.getAttribute("user");
 
 		try {
-			List<Reim> denied = BusinessFactory.getDelegate().getDenied(user);
+			List<Reim> denied = BusinessFactory.getDelegate().getReimByStatus(user, "Denied");
 			session.setAttribute("reims", denied);
 			session.setAttribute("currentSort", 3);
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
@@ -98,7 +98,7 @@ public class DataGrabController{
 		User user = (User)session.getAttribute("user");
 
 		try {
-			List<Reim> pending = BusinessFactory.getDelegate().getPending(user);
+			List<Reim> pending = BusinessFactory.getDelegate().getReimByStatus(user, "Pending");
 			session.setAttribute("reims", pending);
 			session.setAttribute("currentSort", 4);
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")

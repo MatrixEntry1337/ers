@@ -59,12 +59,12 @@ public class DataFacade implements DataFacadeInterface{
 	}
 	
 	@Override
-	public List<Reim> getAllAcceptedReims() throws ServiceUnavailableException {
+	public List<Reim> getAllReimsByStatus(String status) throws ServiceUnavailableException {
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getAllAcceptedReims();
+			List<Reim> list = dao.getAllReimsByStatus(status);
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -80,33 +80,12 @@ public class DataFacade implements DataFacadeInterface{
 	}
 	
 	@Override
-	public List<Reim> getAllDeniedReims() throws ServiceUnavailableException {
+	public List<Reim> getAllReimsByType(String type) throws ServiceUnavailableException {
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getAllDeniedReims();
-			return list;
-		}catch(SQLException e){
-			e.printStackTrace();
-			throw new ServiceUnavailableException();
-		}finally{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	@Override
-	public List<Reim> getAllPendingReims() throws ServiceUnavailableException {
-		Connection conn = null;
-		try{
-			conn = getConnection();
-			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getAllPendingReims();
+			List<Reim> list = dao.getAllReimsByType(type);
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -144,12 +123,12 @@ public class DataFacade implements DataFacadeInterface{
 	}
 
 	@Override
-	public List<Reim> getUserAcceptedReims(int userId) throws ServiceUnavailableException {
+	public List<Reim> getUserReimsByStatus(int userId, String status) throws ServiceUnavailableException {
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getUserAcceptedReims(userId);
+			List<Reim> list = dao.getUserReimsByStatus(userId, status);
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -164,14 +143,14 @@ public class DataFacade implements DataFacadeInterface{
 		}
 		
 	}
-
+	
 	@Override
-	public List<Reim> getUserDeniedReims(int userId) throws ServiceUnavailableException {
+	public List<Reim> getUserReimsByType(int userId, String type) throws ServiceUnavailableException {
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getUserDeniedReims(userId);
+			List<Reim> list = dao.getUserReimsByStatus(userId, type);
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -184,27 +163,7 @@ public class DataFacade implements DataFacadeInterface{
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public List<Reim> getUserPendingReims(int userId) throws ServiceUnavailableException {
-		Connection conn = null;
-		try{
-			conn = getConnection();
-			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getUserPendingReims(userId);
-			return list;
-		}catch(SQLException e){
-			e.printStackTrace();
-			throw new ServiceUnavailableException();
-		}finally{
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 	}
 	
 	@Override

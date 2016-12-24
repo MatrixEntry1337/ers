@@ -58,18 +58,8 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 
 	@Override
-	public List<Reim> getAccepted(User user) throws ServiceUnavailableException {
-		return ReimService.getInstance().getAcceptedOnly(user);
-	}
-
-	@Override
-	public List<Reim> getDenied(User user) throws ServiceUnavailableException {
-		return ReimService.getInstance().getDeniedOnly(user);
-	}
-
-	@Override
-	public List<Reim> getPending(User user) throws ServiceUnavailableException {
-		return ReimService.getInstance().getPendingOnly(user);
+	public List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException {
+		return ReimService.getInstance().getReimByStatus(user, status);
 	}
 
 	@Override

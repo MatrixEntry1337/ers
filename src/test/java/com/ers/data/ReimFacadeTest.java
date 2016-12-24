@@ -43,6 +43,7 @@ public class ReimFacadeTest {
 	public void getAllReims() throws Exception{
 		System.out.println("All Reims Test");
 		List<Reim> list = DataFacade.getInstance().getAllReims();
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertNotEquals(null, reim);
 		}
@@ -51,7 +52,8 @@ public class ReimFacadeTest {
 	@Test
 	public void getAllAcceptedReims() throws Exception{
 		System.out.println("All Accepted Reims Test");
-		List<Reim> list = DataFacade.getInstance().getAllAcceptedReims();
+		List<Reim> list = DataFacade.getInstance().getAllReimsByStatus("Accepted");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Accepted", reim.getStatus().getStatus());
 		}
@@ -60,7 +62,8 @@ public class ReimFacadeTest {
 	@Test
 	public void getAllDeniedReims() throws Exception{
 		System.out.println("All Denied Reims Test");
-		List<Reim> list = DataFacade.getInstance().getAllDeniedReims();
+		List<Reim> list = DataFacade.getInstance().getAllReimsByStatus("Denied");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Denied", reim.getStatus().getStatus());
 		}
@@ -69,16 +72,58 @@ public class ReimFacadeTest {
 	@Test
 	public void getAllPendingReims() throws Exception{
 		System.out.println("All Pending Reims Test");
-		List<Reim> list = DataFacade.getInstance().getAllPendingReims();
+		List<Reim> list = DataFacade.getInstance().getAllReimsByStatus("Pending");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Pending", reim.getStatus().getStatus());
 		}
 	}
 	
 	@Test
+	public void getAllFoodReims() throws Exception{
+		System.out.println("All Food Reims");
+		List<Reim> list = DataFacade.getInstance().getAllReimsByType("Food");
+		assertTrue(list.size() > 0);
+		for(Reim reim: list){
+			assertEquals("Food", reim.getType().getType());
+		}
+	}
+	
+	@Test
+	public void getAllLodgingReims() throws Exception{
+		System.out.println("All Food Reims");
+		List<Reim> list = DataFacade.getInstance().getAllReimsByType("Lodging");
+		assertTrue(list.size() > 0);
+		for(Reim reim: list){
+			assertEquals("Lodging", reim.getType().getType());
+		}
+	}
+	
+	@Test
+	public void getAllTravelReims() throws Exception{
+		System.out.println("All Food Reims");
+		List<Reim> list = DataFacade.getInstance().getAllReimsByType("Travel");
+		assertTrue(list.size() > 0);
+		for(Reim reim: list){
+			assertEquals("Travel", reim.getType().getType());
+		}
+	}
+	
+	@Test
+	public void getAllOtherReims() throws Exception{
+		System.out.println("All Food Reims");
+		List<Reim> list = DataFacade.getInstance().getAllReimsByType("Other");
+		assertTrue(list.size() > 0);
+		for(Reim reim: list){
+			assertEquals("Other", reim.getType().getType());
+		}
+	}
+	
+	@Test
 	public void getUserAcceptedReims() throws Exception{
 		System.out.println("User Accepted Reims Test");
-		List<Reim> list = DataFacade.getInstance().getUserAcceptedReims(3);
+		List<Reim> list = DataFacade.getInstance().getUserReimsByStatus(1, "Accepted");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Accepted", reim.getStatus().getStatus());
 		}
@@ -88,7 +133,8 @@ public class ReimFacadeTest {
 	@Test
 	public void getUserDeniedReims() throws Exception{
 		System.out.println("User Denied Reims Test");
-		List<Reim> list = DataFacade.getInstance().getUserDeniedReims(3);
+		List<Reim> list = DataFacade.getInstance().getUserReimsByStatus(1, "Denied");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Denied", reim.getStatus().getStatus());
 		}
@@ -98,7 +144,8 @@ public class ReimFacadeTest {
 	@Test
 	public void getUserPendingReims() throws Exception{
 		System.out.println("User Pending Reims Test");
-		List<Reim> list = DataFacade.getInstance().getUserPendingReims(3);
+		List<Reim> list = DataFacade.getInstance().getUserReimsByStatus(1, "Pending");
+		assertTrue(list.size() > 0);
 		for(Reim reim: list){
 			assertEquals("Pending", reim.getStatus().getStatus());
 		}

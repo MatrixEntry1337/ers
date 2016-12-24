@@ -18,8 +18,7 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li role="presentation" class="<c:if test="${currentSort==1}">active</c:if>">
 						<a href="/ers/secure/main.do">All</a>					
-					</li>
-					 
+					</li> 
 					<li role="presentation" class="<c:if test="${currentSort==2}">active</c:if>">
 						<a href="/ers/secure/accepted.do">Accepted</a>
 					</li> 
@@ -29,7 +28,7 @@
 					<li role="presentation" class="<c:if test="${currentSort==4}">active</c:if>">
 						<a href="/ers/secure/pending.do">Pending</a>
 					</li>
-					
+					<li role="presentation"><a>Another</a></li>
 				</ul>
 			</div>
 		</div>

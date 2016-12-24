@@ -85,37 +85,14 @@ class ReimService {
 	}
 	
 	// TODO sort algos here
-	List<Reim> getAcceptedOnly(User user) throws ServiceUnavailableException{
+	List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException{
 		List<Reim> list;
 		if(user.getRole().getRole().equals("Manager")){
-			list = DataFactory.getFacade().getAllAcceptedReims();
+			list = DataFactory.getFacade().getAllReimsByStatus("Accepted");
 		}else{
-			list = DataFactory.getFacade().getUserAcceptedReims(user.getId());
+			list = DataFactory.getFacade().getUserReimsByStatus(user.getId(), status);
 		}
 		Collections.sort(list);
 		return list;
 	}
-	
-	List<Reim> getDeniedOnly(User user) throws ServiceUnavailableException{
-		List<Reim> list;
-		if(user.getRole().getRole().equals("Manager")){
-			list = DataFactory.getFacade().getAllDeniedReims();
-		}else{
-			list = DataFactory.getFacade().getUserDeniedReims(user.getId());
-		}
-		Collections.sort(list);
-		return list;
-	}
-	
-	List<Reim> getPendingOnly(User user) throws ServiceUnavailableException{
-		List<Reim> list;
-		if(user.getRole().getRole().equals("Manager")){
-			list = DataFactory.getFacade().getAllPendingReims();
-		}else{
-			list = DataFactory.getFacade().getUserPendingReims(user.getId());
-		}
-		Collections.sort(list);
-		return list;
-	}
-	
 }
