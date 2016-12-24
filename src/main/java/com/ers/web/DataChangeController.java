@@ -92,10 +92,6 @@ public class DataChangeController {
 
 		public void createReim(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException{
-			// debug
-			System.out.println(req.getParameter("amount"));
-			System.out.println(req.getParameter("description"));
-			System.out.println(req.getParameter("type"));
 
 			// grab session
 			HttpSession session = req.getSession();

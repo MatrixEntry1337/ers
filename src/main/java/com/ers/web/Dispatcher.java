@@ -1,11 +1,14 @@
 package com.ers.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ers.beans.Status;
 
 public class Dispatcher extends HttpServlet{
 
@@ -14,6 +17,7 @@ public class Dispatcher extends HttpServlet{
 			throws ServletException, IOException {
 
 		String requestURI = req.getRequestURI();
+		
 		switch(requestURI){
 			case "/ers/login.do":{
 				LoginController.getInstance().login(req, resp);
@@ -39,16 +43,15 @@ public class Dispatcher extends HttpServlet{
 				DataChangeController.getInstance().denyReim(req, resp);
 				break;
 			}
-			case "/ers/secure/accepted.do":{
+			case "/ers/secure/Accepted.do":{
 				DataGrabController.getInstance().getAccepted(req, resp);
 				break;
 			}
-			// todo input type
-			case "/ers/secure/denied.do":{
+			case "/ers/secure/Denied.do":{
 				DataGrabController.getInstance().getDenied(req, resp);
 				break;
 			}
-			case "/ers/secure/pending.do":{
+			case "/ers/secure/Pending.do":{
 				DataGrabController.getInstance().getPending(req, resp);
 				break;
 			}

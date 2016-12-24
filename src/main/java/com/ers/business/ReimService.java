@@ -43,39 +43,27 @@ class ReimService {
 
 	Reim createReim(User user, double amount, Type type, Status status, String description) 
 			throws ServiceUnavailableException, ValidateException{
-		//TODO: validate, then pass Reim
 		if(amount > 4000){
-			String message = "Please enter a value that is under $4000";
+			String message = "Please enter a value that is under $4000.";
+			throw new ValidateException(message);
+		}
+		if(description.length() > 250){
+			String message = "Please enter a description that is 250 characters or less.";
 			throw new ValidateException(message);
 		}
 		return DataFactory.getFacade().createReim(user, amount, type, status, description);
 	}
 
 	List<Reim> getReims(User user) throws ServiceUnavailableException {
-		// decide based on role if to call reims for a specific user
-		// or to call for all reims
+		List<Reim> list;
 		if(user.getRole().getRole().equals("Manager"))
-			return getAllReims();
-		return getUserReims(user);
-	}
-	
-	/* Helper Functions */
-	
-	private List<Reim> getAllReims()
-	//TODO put in pagination here
-			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getAllReims();
+			list = DataFactory.getFacade().getAllReims();
+		else
+			list = DataFactory.getFacade().getUserReims(user.getId());
 		Collections.sort(list);
 		return list;
 	}
-
-	List<Reim> getUserReims(User user) 
-			throws ServiceUnavailableException{
-		List<Reim> list = DataFactory.getFacade().getUserReims(user.getId());
-		Collections.sort(list);
-		return list;
-	}
-
+	
 	List<Type> getAllTypes() throws ServiceUnavailableException {
 		return DataFactory.getFacade().getAllTypes(); 
 	}
@@ -84,14 +72,23 @@ class ReimService {
 		return DataFactory.getFacade().getAllStatus();
 	}
 	
-	// TODO sort algos here
 	List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException{
 		List<Reim> list;
-		if(user.getRole().getRole().equals("Manager")){
+		if(user.getRole().getRole().equals("Manager"))
 			list = DataFactory.getFacade().getAllReimsByStatus("Accepted");
-		}else{
+		else
 			list = DataFactory.getFacade().getUserReimsByStatus(user.getId(), status);
-		}
+		
+		Collections.sort(list);
+		return list;
+	}
+	
+	List<Reim> getReimByType(User user, String type) throws ServiceUnavailableException{
+		List<Reim> list;
+		if(user.getRole().getRole().equals("Manager"))
+			list = DataFactory.getFacade().getAllReimsByType(type);
+		else
+			list = DataFactory.getFacade().getUserReimsByType(user.getId(), type);
 		Collections.sort(list);
 		return list;
 	}

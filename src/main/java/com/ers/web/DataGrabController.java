@@ -66,7 +66,7 @@ public class DataGrabController{
 		try {
 			List<Reim> accepted = BusinessFactory.getDelegate().getReimByStatus(user, "Accepted");
 			session.setAttribute("reims", accepted);
-			session.setAttribute("currentSort", 2);
+			session.setAttribute("currentSort", "Accepted");
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 			.forward(req, resp);
 		} catch (ServiceUnavailableException e) {
@@ -83,7 +83,7 @@ public class DataGrabController{
 		try {
 			List<Reim> denied = BusinessFactory.getDelegate().getReimByStatus(user, "Denied");
 			session.setAttribute("reims", denied);
-			session.setAttribute("currentSort", 3);
+			session.setAttribute("currentSort", "Denied");
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 			.forward(req, resp);
 		} catch (ServiceUnavailableException e) {
@@ -100,7 +100,7 @@ public class DataGrabController{
 		try {
 			List<Reim> pending = BusinessFactory.getDelegate().getReimByStatus(user, "Pending");
 			session.setAttribute("reims", pending);
-			session.setAttribute("currentSort", 4);
+			session.setAttribute("currentSort", "Pending");
 			req.getRequestDispatcher("/WEB-INF/pages/main.jsp")
 			.forward(req, resp);
 		} catch (ServiceUnavailableException e) {
