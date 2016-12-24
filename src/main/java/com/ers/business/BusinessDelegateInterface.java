@@ -18,7 +18,11 @@ public interface BusinessDelegateInterface {
 	
 	public List<Reim> getReims(User user) throws ServiceUnavailableException;
 	
-	public List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException;
+	public List<Reim> getReimByStatus(User user, String status) 
+			throws ServiceUnavailableException;
+	
+	public List<Reim> getReimByType(User user, String type) 
+			throws ServiceUnavailableException; 
 	
 	public List<Reim> geStatusAscend(List<Reim> original);
 	

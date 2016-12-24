@@ -16,12 +16,17 @@
 		<div class="col-md-4">
 			<div>
 				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation" class="<c:if test="${currentSort==All}">active</c:if>">
+					<li role="presentation" class="<c:if test="${currentSort=='All'}">active</c:if>">
 						<a href="/ers/secure/main.do">All</a>					
 					</li> 
 					<c:forEach var="each" items="${ status }">
 					<li role="presentation" class="<c:if test="${currentSort==each.status}">active</c:if>">
 						<a href="/ers/secure/<c:out value="${ each.status }"/>.do"><c:out value="${ each.status }" /></a>
+					</li>
+					</c:forEach>
+					<c:forEach var="each" items="${ types }">
+					<li role="presentation" class="<c:if test="${currentSort==each.type}">active</c:if>">
+						<a href="/ers/secure/<c:out value="${ each.type }"/>.do"><c:out value="${ each.type }" /></a>
 					</li>
 					</c:forEach>
 				</ul>

@@ -58,10 +58,17 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 
 	@Override
-	public List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException {
+	public List<Reim> getReimByStatus(User user, String status) 
+			throws ServiceUnavailableException {
 		return ReimService.getInstance().getReimByStatus(user, status);
 	}
 
+	@Override
+	public List<Reim> getReimByType(User user, String type) 
+			throws ServiceUnavailableException {
+		return ReimService.getInstance().getReimByType(user, type);
+	}
+	
 	@Override
 	public List<Reim> geStatusAscend(List<Reim> original) {
 		// TODO Auto-generated method stub
@@ -97,5 +104,6 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

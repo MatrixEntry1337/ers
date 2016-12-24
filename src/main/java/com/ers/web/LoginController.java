@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ers.beans.Type;
 import com.ers.beans.User;
 import com.ers.business.BusinessFactory;
 

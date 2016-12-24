@@ -150,7 +150,7 @@ public class DataFacade implements DataFacadeInterface{
 		try{
 			conn = getConnection();
 			ReimDAO dao = new ReimDAO(conn);
-			List<Reim> list = dao.getUserReimsByStatus(userId, type);
+			List<Reim> list = dao.getUserReimsByType(userId, type);
 			return list;
 		}catch(SQLException e){
 			e.printStackTrace();

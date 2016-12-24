@@ -1,15 +1,14 @@
 package com.ers.web;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ers.beans.Status;
 
+@SuppressWarnings("serial")
 public class Dispatcher extends HttpServlet{
 
 	@Override
@@ -53,6 +52,22 @@ public class Dispatcher extends HttpServlet{
 			}
 			case "/ers/secure/Pending.do":{
 				DataGrabController.getInstance().getPending(req, resp);
+				break;
+			}
+			case "/ers/secure/Food.do":{
+				DataGrabController.getInstance().getFood(req, resp);
+				break;
+			}
+			case "/ers/secure/Lodging.do":{
+				DataGrabController.getInstance().getLodging(req, resp);
+				break;
+			}
+			case "/ers/secure/Travel.do":{
+				DataGrabController.getInstance().getTravel(req, resp);
+				break;
+			}
+			case "/ers/secure/Other.do":{
+				DataGrabController.getInstance().getOther(req, resp);
 				break;
 			}
 			case "/ers/secure/dateAscend.do":{

@@ -74,8 +74,9 @@ class ReimService {
 	
 	List<Reim> getReimByStatus(User user, String status) throws ServiceUnavailableException{
 		List<Reim> list;
+		
 		if(user.getRole().getRole().equals("Manager"))
-			list = DataFactory.getFacade().getAllReimsByStatus("Accepted");
+			list = DataFactory.getFacade().getAllReimsByStatus(status);
 		else
 			list = DataFactory.getFacade().getUserReimsByStatus(user.getId(), status);
 		
@@ -85,10 +86,12 @@ class ReimService {
 	
 	List<Reim> getReimByType(User user, String type) throws ServiceUnavailableException{
 		List<Reim> list;
+		
 		if(user.getRole().getRole().equals("Manager"))
 			list = DataFactory.getFacade().getAllReimsByType(type);
 		else
 			list = DataFactory.getFacade().getUserReimsByType(user.getId(), type);
+		
 		Collections.sort(list);
 		return list;
 	}
