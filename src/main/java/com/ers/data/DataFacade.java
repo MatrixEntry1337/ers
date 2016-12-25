@@ -52,7 +52,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -73,7 +72,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -94,7 +92,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -116,7 +113,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -137,7 +133,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -159,7 +154,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -188,7 +182,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -210,7 +203,6 @@ public class DataFacade implements DataFacadeInterface{
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -56,6 +56,7 @@ class ReimService {
 
 	List<Reim> getReims(User user) throws ServiceUnavailableException {
 		List<Reim> list;
+		
 		if(user.getRole().getRole().equals("Manager"))
 			list = DataFactory.getFacade().getAllReims();
 		else

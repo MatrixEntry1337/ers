@@ -12,7 +12,17 @@
 			</p>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row content-margin">
+		<div class="col-md-6 col-md-offset-4">
+			<ul class="nav nav-pills">
+			  <li role="presentation" class="active"><a href="#">Price</a></li>
+			  <li role="presentation"><a href="#">Type</a></li>
+			  <li role="presentation"><a href="#">Status</a></li>
+			  <li role="presentation"><a href="#">Description</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row content-margin">
 		<div class="col-md-4">
 			<div>
 				<ul class="nav nav-pills nav-stacked">

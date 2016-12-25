@@ -1,7 +1,10 @@
 package com.ers.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.After;
@@ -11,6 +14,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ers.beans.Reim;
+import com.ers.beans.Status;
+import com.ers.beans.Type;
+import com.ers.beans.User;
 
 public class ReimFacadeTest {
 	
@@ -40,6 +46,18 @@ public class ReimFacadeTest {
 	}
 	
 	@Test
+	public void createReim() throws Exception {
+		System.out.println("Test -- Create Reim");
+		User user = new User(4);
+		Reim created = DataFacade.getInstance().createReim(user, 20.45, new Type(4, "Other"), new Status(1, "Pending"), "JUnit Test");
+		List<Reim> list = DataFactory.getFacade().getAllReims();
+		Collections.sort(list);
+		assertEquals(created, list.get(0));
+		assertEquals(created.getId(), list.get(0).getId());
+//		System.out.println(list);
+	}
+	
+	@Test
 	public void getAllReims() throws Exception{
 		System.out.println("Test -- All Reims");
 		List<Reim> list = DataFacade.getInstance().getAllReims();
@@ -47,6 +65,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertNotEquals(null, reim);
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -57,6 +76,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Accepted", reim.getStatus().getStatus());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -67,6 +87,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Denied", reim.getStatus().getStatus());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -77,6 +98,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Pending", reim.getStatus().getStatus());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -87,6 +109,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Food", reim.getType().getType());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -97,6 +120,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Lodging", reim.getType().getType());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -107,6 +131,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Travel", reim.getType().getType());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -117,6 +142,7 @@ public class ReimFacadeTest {
 		for(Reim reim: list){
 			assertEquals("Other", reim.getType().getType());
 		}
+//		System.out.println(list);
 	}
 	
 	@Test
@@ -158,7 +184,7 @@ public class ReimFacadeTest {
 		List<Reim> list = DataFacade.getInstance().getUserReimsByType(1, "Food");
 		assertTrue(list.size() > 0);
 		for(Reim reim: list){
-			assertEquals("Type", reim.getType().getType());
+			assertEquals("Food", reim.getType().getType());
 		}
 //		System.out.println(list);
 	}
