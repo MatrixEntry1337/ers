@@ -15,10 +15,38 @@
 	<div class="row content-margin">
 		<div class="col-md-6 col-md-offset-4">
 			<ul class="nav nav-pills">
-			  <li role="presentation" class="active"><a href="#">Price</a></li>
-			  <li role="presentation"><a href="#">Type</a></li>
-			  <li role="presentation"><a href="#">Status</a></li>
-			  <li role="presentation"><a href="#">Description</a></li>
+				<li role="presentation"
+					<c:if test="${ currentSort == 1 }">
+						class="active"
+					</c:if>>
+					<a href="/ers/secure/date.do">Date</a>
+				</li>
+				<li role="presentation"
+					<c:if test="${ currentSort == 2 }">
+						class="active"
+					</c:if>>
+					<a href="/ers/secure/price.do">Amount</a>
+				</li>
+				<c:if test="${ currentSelection != 'insertStuffHere' }">
+				  	<li role="presentation"
+				  	 	<c:if test="${ currentSort == 3 }">
+							class="active"
+						</c:if>>
+				  		<a href="/ers/secure/type.do">Type</a>
+				  	</li>
+			  	</c:if>
+			  	<li role="presentation"
+			  		<c:if test="${ currentSort == 4 }">
+						class="active"
+					</c:if>>
+			  		<a href="/ers/secure/status.do">Status</a>
+			  	</li>
+			  	<li role="presentation"
+			  		<c:if test="${ currentSort == 5 }">
+						class="active"
+					</c:if>>
+			  		<a href="/ers/secure/description.do">Description</a>
+			  	</li>
 			</ul>
 		</div>
 	</div>
@@ -26,16 +54,16 @@
 		<div class="col-md-4">
 			<div>
 				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation" class="<c:if test="${currentSort=='All'}">active</c:if>">
+					<li role="presentation" class="<c:if test="${currentSelection=='All'}">active</c:if>">
 						<a href="/ers/secure/main.do">All</a>					
 					</li> 
 					<c:forEach var="each" items="${ status }">
-					<li role="presentation" class="<c:if test="${currentSort==each.status}">active</c:if>">
+					<li role="presentation" class="<c:if test="${currentSelection==each.status}">active</c:if>">
 						<a href="/ers/secure/<c:out value="${ each.status }"/>.do"><c:out value="${ each.status }" /></a>
 					</li>
 					</c:forEach>
 					<c:forEach var="each" items="${ types }">
-					<li role="presentation" class="<c:if test="${currentSort==each.type}">active</c:if>">
+					<li role="presentation" class="<c:if test="${currentSelection==each.type}">active</c:if>">
 						<a href="/ers/secure/<c:out value="${ each.type }"/>.do"><c:out value="${ each.type }" /></a>
 					</li>
 					</c:forEach>

@@ -67,7 +67,7 @@ public class ReimDataTest {
 			System.out.println(each);
 		}
 		
-		Reim.ReimStatusReverse statusReverse = new Reim.ReimStatusReverse();
+		Reim.ReimStatusInverse statusReverse = new Reim.ReimStatusInverse();
 		Collections.sort(list, statusReverse);
 		System.out.println("Status Sort Reverse: " );
 		for(Reim each: list){
@@ -83,7 +83,7 @@ public class ReimDataTest {
 			System.out.println(each);
 		}
 		
-		Reim.ReimTypeReverse typeReverse = new Reim.ReimTypeReverse();
+		Reim.ReimTypeInverse typeReverse = new Reim.ReimTypeInverse();
 		Collections.sort(list, typeReverse);
 		System.out.println("Type Sort Reverse");
 		for(Reim each: list){

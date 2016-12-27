@@ -1,5 +1,6 @@
 package com.ers.business;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.naming.AuthenticationException;
@@ -68,42 +69,30 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 			throws ServiceUnavailableException {
 		return ReimService.getInstance().getReimByType(user, type);
 	}
+
+	@Override
+	public void sortStatus(List<Reim> list) {
+		ReimService.getInstance().sortStatus(list);
+	}
+
+	@Override
+	public void sortType(List<Reim> list) {
+		ReimService.getInstance().sortType(list);
+	}
+
+	@Override
+	public void sortDate(List<Reim> list) {
+		ReimService.getInstance().sortDate(list);
+	}
+
+	@Override
+	public void sortAmount(List<Reim> list) {
+		ReimService.getInstance().sortAmount(list);
+	}
+
+	@Override
+	public void sortDescription(List<Reim> list) {
+		ReimService.getInstance().sortDescripion(list);
+	}
 	
-	@Override
-	public List<Reim> geStatusAscend(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reim> getStatusDescend(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reim> getTypeAscend(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reim> getTypeDescend(List<Reim> orignal) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reim> getDateAscend(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reim> getDateDescend(List<Reim> original) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

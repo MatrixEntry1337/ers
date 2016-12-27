@@ -146,7 +146,7 @@ public class Reim implements Comparable<Reim>{
 		
 	}
 	
-	public static  class ReimStatusReverse implements Comparator<Reim>{
+	public static  class ReimStatusInverse implements Comparator<Reim>{
 
 		@Override
 		public int compare(Reim one, Reim two) {
@@ -164,11 +164,65 @@ public class Reim implements Comparable<Reim>{
 		
 	}
 	
-	public static class ReimTypeReverse implements Comparator<Reim>{
+	public static class ReimTypeInverse implements Comparator<Reim>{
 
 		@Override
 		public int compare(Reim one, Reim two) {
 			return one.type.compareTo(two.type) * -1;
+		}
+		
+	}
+	
+	public static class ReimAmountNatural implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return (int)(one.amount - two.amount);
+		}
+		
+	}
+	
+	public static class ReimAmountInverse implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return (int)(one.amount - two.amount) * -1;
+		}
+		
+	}
+	
+	public static class ReimDescriptionNatural implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.description.compareTo(two.description);
+		}
+		
+	}
+	
+	public static class ReimDescriptionInverse implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.description.compareTo(two.description) * -1;
+		}
+		
+	}
+	
+	public static class ReimSubmittedNatural implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.submitted.compareTo(two.submitted);
+		}
+		
+	}
+	
+	public static class ReimSubmittedInverse implements Comparator<Reim>{
+
+		@Override
+		public int compare(Reim one, Reim two) {
+			return one.submitted.compareTo(two.submitted) * -1;
 		}
 		
 	}
@@ -178,5 +232,3 @@ public class Reim implements Comparable<Reim>{
 		return other.id - this.id;
 	}
 }
-
-

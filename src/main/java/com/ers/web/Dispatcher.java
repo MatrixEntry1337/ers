@@ -70,12 +70,24 @@ public class Dispatcher extends HttpServlet{
 				DataGrabController.getInstance().getOther(req, resp);
 				break;
 			}
-			case "/ers/secure/dateAscend.do":{
-				DataGrabController.getInstance().getDateAscend(req, resp);
+			case "/ers/secure/price.do":{
+				DataSortController.getInstance().sortAmount(req, resp);
 				break;
 			}
-			case "/ers/secure/dateDescend.do":{
-				DataGrabController.getInstance().getDateDescend(req, resp);
+			case "/ers/secure/date.do":{
+				DataSortController.getInstance().sortDate(req, resp);
+				break;
+			}
+			case "/ers/secure/type.do":{
+				DataSortController.getInstance().sortType(req, resp);
+				break;
+			}
+			case "/ers/secure/status.do":{
+				DataSortController.getInstance().sortStatus(req, resp);
+				break;
+			}
+			case "/ers/secure/description.do":{
+				DataSortController.getInstance().sortDescription(req, resp);
 				break;
 			}
 			default:{

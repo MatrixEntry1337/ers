@@ -96,4 +96,24 @@ class ReimService {
 		Collections.sort(list);
 		return list;
 	}
+
+	public void sortStatus(List<Reim> list) {
+		Collections.sort(list, new Reim.ReimStatusNatural());
+	}
+
+	public void sortType(List<Reim> list) {
+		Collections.sort(list, new Reim.ReimTypeNatural());
+	}
+
+	public void sortDate(List<Reim> list) {
+		Collections.sort(list, new Reim.ReimSubmittedNatural());
+	}
+
+	public void sortAmount(List<Reim> list) {
+		Collections.sort(list, new Reim.ReimAmountNatural());
+	}
+
+	public void sortDescripion(List<Reim> list) {
+		Collections.sort(list, new Reim.ReimDescriptionNatural());
+	}
 }
