@@ -24,15 +24,15 @@ public interface BusinessDelegateInterface {
 	public List<Reim> getReimByType(User user, String type) 
 			throws ServiceUnavailableException; 
 	
-	public void sortStatus(List<Reim> list);
+	public void sortStatus(List<Reim> list, boolean check);
 	
-	public void sortType(List<Reim> list);
+	public void sortType(List<Reim> list, boolean check);
 	
-	public void sortDate(List<Reim> list);
+	public void sortDate(List<Reim> list, boolean check);
 	
-	public void sortAmount(List<Reim> list);
+	public void sortAmount(List<Reim> list, boolean check);
 	
-	public void sortDescription(List<Reim> list);
+	public void sortDescription(List<Reim> list, boolean check);
 	
 	public void changeStatus(Reim reim, User user, Status status)
 			throws ServiceUnavailableException, UnauthorizedException;

@@ -97,23 +97,38 @@ class ReimService {
 		return list;
 	}
 
-	public void sortStatus(List<Reim> list) {
-		Collections.sort(list, new Reim.ReimStatusNatural());
+	public void sortStatus(List<Reim> list, boolean check) {
+		if(check)
+			Collections.sort(list, new Reim.ReimStatusNatural());
+		else
+			Collections.sort(list, new Reim.ReimStatusInverse());
 	}
 
-	public void sortType(List<Reim> list) {
-		Collections.sort(list, new Reim.ReimTypeNatural());
+	public void sortType(List<Reim> list, boolean check) {
+		if(check)
+			Collections.sort(list, new Reim.ReimTypeNatural());
+		else
+			Collections.sort(list, new Reim.ReimTypeInverse());
 	}
 
-	public void sortDate(List<Reim> list) {
-		Collections.sort(list, new Reim.ReimSubmittedNatural());
+	public void sortDate(List<Reim> list, boolean check) {
+		if(check)
+			Collections.sort(list, new Reim.ReimSubmittedNatural());
+		else
+			Collections.sort(list, new Reim.ReimSubmittedInverse());
 	}
 
-	public void sortAmount(List<Reim> list) {
-		Collections.sort(list, new Reim.ReimAmountNatural());
+	public void sortAmount(List<Reim> list, boolean check) {
+		if(check)
+			Collections.sort(list, new Reim.ReimAmountNatural());
+		else
+			Collections.sort(list, new Reim.ReimAmountInverse());
 	}
 
-	public void sortDescripion(List<Reim> list) {
-		Collections.sort(list, new Reim.ReimDescriptionNatural());
+	public void sortDescripion(List<Reim> list, boolean check) {
+		if(check)
+			Collections.sort(list, new Reim.ReimDescriptionNatural());
+		else
+			Collections.sort(list, new Reim.ReimDescriptionInverse());
 	}
 }

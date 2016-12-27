@@ -71,28 +71,28 @@ public class BusinessDelegate implements BusinessDelegateInterface{
 	}
 
 	@Override
-	public void sortStatus(List<Reim> list) {
-		ReimService.getInstance().sortStatus(list);
+	public void sortStatus(List<Reim> list, boolean check) {
+		ReimService.getInstance().sortStatus(list, check);
 	}
 
 	@Override
-	public void sortType(List<Reim> list) {
-		ReimService.getInstance().sortType(list);
+	public void sortType(List<Reim> list, boolean check) {
+		ReimService.getInstance().sortType(list, check);
 	}
 
 	@Override
-	public void sortDate(List<Reim> list) {
-		ReimService.getInstance().sortDate(list);
+	public void sortDate(List<Reim> list, boolean check) {
+		ReimService.getInstance().sortDate(list, check);
 	}
 
 	@Override
-	public void sortAmount(List<Reim> list) {
-		ReimService.getInstance().sortAmount(list);
+	public void sortAmount(List<Reim> list, boolean check) {
+		ReimService.getInstance().sortAmount(list, check);
 	}
 
 	@Override
-	public void sortDescription(List<Reim> list) {
-		ReimService.getInstance().sortDescripion(list);
+	public void sortDescription(List<Reim> list, boolean check) {
+		ReimService.getInstance().sortDescripion(list, check);
 	}
 	
 }
