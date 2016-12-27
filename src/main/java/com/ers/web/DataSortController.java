@@ -93,7 +93,7 @@ public class DataSortController {
 		String sortInUse = (String)session.getAttribute("sortInUse");
 		if(sortInUse == null) sortInUse = "norm";
 		
-		if( sortInUse.equals("statusInverse") ){
+		if( sortInUse.equals("inverse") ){
 			session.setAttribute("sortInUse", "norm");
 			BusinessFactory.getDelegate().sortStatus(list, false);
 		}else{
@@ -114,7 +114,7 @@ public class DataSortController {
 		String sortInUse = (String)session.getAttribute("sortInUse");
 		if(sortInUse == null) sortInUse = "norm";
 		
-		if(sortInUse.equals("descriptionInverse")){
+		if(sortInUse.equals("inverse")){
 			session.setAttribute("sortInUse", "norm");
 			BusinessFactory.getDelegate().sortDescription(list, false);
 		}else{

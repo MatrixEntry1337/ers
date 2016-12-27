@@ -20,6 +20,7 @@ import com.ers.beans.User;
 
 public class ReimFacadeTest {
 	
+	// executes once before all tests
 	@BeforeClass
 	public static void setUpBeforeClass() 
 			throws Exception{
