@@ -27,7 +27,8 @@
 					</c:if>>
 					<a href="/ers/secure/price.do">Amount</a>
 				</li>
-				<c:if test="${ currentSelection != 'insertStuffHere' }">
+				<c:if test="${ currentSelection != 'Food' && currentSelection != 'Lodging' 
+					&& currentSelection != 'Travel' && currentSelection != 'Other' }">
 				  	<li role="presentation"
 				  	 	<c:if test="${ currentSort == 3 }">
 							class="active"
@@ -35,12 +36,15 @@
 				  		<a href="/ers/secure/type.do">Type</a>
 				  	</li>
 			  	</c:if>
+			  	<c:if test="${ currentSelection != 'Accepted' && currentSelection != 'Pending'
+			  	&& currentSelection != 'Denied' }">
 			  	<li role="presentation"
 			  		<c:if test="${ currentSort == 4 }">
 						class="active"
 					</c:if>>
 			  		<a href="/ers/secure/status.do">Status</a>
 			  	</li>
+			  	</c:if>
 			  	<li role="presentation"
 			  		<c:if test="${ currentSort == 5 }">
 						class="active"
